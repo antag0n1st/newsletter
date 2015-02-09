@@ -1,0 +1,108 @@
+# Use PHP 5.3
+#Action application/x-hg-php53 /cgi-sys/php53
+#AddHandler application/x-hg-php53 .php
+
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^example\.com
+RewriteRule ^(.*)$ http://www.example.com/$1 [R=permanent,L]
+
+RewriteRule ^no-privileges$ no_privileges.php?%{QUERY_STRING}
+
+
+#RewriteRule ^category-name/?([0-9]+)?$ index.php?controller=blog&action=main&cat=category-name&params=$1&%{QUERY_STRING}
+#RewriteRule ^([a-zA-Z0-9_-]+)/category-name/([0-9]+)$ index.php?controller=blog&action=single&cat=category-name&params=$2&%{QUERY_STRING}
+
+#RewriteRule ^vrski/?([0-9]+)?$ index.php?controller=blog&action=main&cat=vrski&params=$1&%{QUERY_STRING}
+#RewriteRule ^([a-zA-Z0-9_-]+)/vrski/([0-9]+)$ index.php?controller=blog&action=single&cat=vrski&params=$2&%{QUERY_STRING}
+
+#RewriteRule ^sex/?([0-9]+)?$ index.php?controller=blog&action=main&cat=sex&params=$1&%{QUERY_STRING}
+#RewriteRule ^([a-zA-Z0-9_-]+)/sex/([0-9]+)$ index.php?controller=blog&action=single&cat=sex&params=$2&%{QUERY_STRING}
+
+#RewriteRule ^ljubov/?([0-9]+)?$ index.php?controller=blog&action=main&cat=ljubov&params=$1&%{QUERY_STRING}
+#RewriteRule ^([a-zA-Z0-9_-]+)/ljubov/([0-9]+)$ index.php?controller=blog&action=single&cat=ljubov&params=$2&%{QUERY_STRING}
+
+RewriteRule ^ubavina-zdravje/?([0-9]+)?$ index.php?controller=blog&action=main&cat=ubavina-zdravje&params=$1&%{QUERY_STRING}
+RewriteRule ^tretmani-ubavina/?([0-9]+)?$ index.php?controller=blog&action=main&cat=tretmani-ubavina&params=$1&%{QUERY_STRING}
+RewriteRule ^soveti-nega/?([0-9]+)?$ index.php?controller=blog&action=main&cat=soveti-nega&params=$1&%{QUERY_STRING}
+
+RewriteRule ^dieti-fitnes/?([0-9]+)?$ index.php?controller=blog&action=main&cat=dieti-fitnes&params=$1&%{QUERY_STRING}
+RewriteRule ^vezbi-zeni/?([0-9]+)?$ index.php?controller=blog&action=main&cat=vezbi-zeni&params=$1&%{QUERY_STRING}
+RewriteRule ^soveti-ishrana/?([0-9]+)?$ index.php?controller=blog&action=main&cat=soveti-ishrana&params=$1&%{QUERY_STRING}
+
+RewriteRule ^ljubov-sex/?([0-9]+)?$ index.php?controller=blog&action=main&cat=ljubov-sex&params=$1&%{QUERY_STRING}
+#RewriteRule ^soveti/?([0-9]+)?$ index.php?controller=blog&action=main&cat=soveti&params=$1&%{QUERY_STRING}
+
+RewriteRule ^moda/?([0-9]+)?$ index.php?controller=blog&action=main&cat=moda&params=$1&%{QUERY_STRING}
+
+RewriteRule ^zabava/?([0-9]+)?$ index.php?controller=blog&action=main&cat=zabava&params=$1&%{QUERY_STRING}
+RewriteRule ^jet-set/?([0-9]+)?$ index.php?controller=blog&action=main&cat=jet-set&params=$1&%{QUERY_STRING}
+RewriteRule ^kultura/?([0-9]+)?$ index.php?controller=blog&action=main&cat=kultura&params=$1&%{QUERY_STRING}
+RewriteRule ^niz-vremeto/?([0-9]+)?$ index.php?controller=blog&action=main&cat=niz-vremeto&params=$1&%{QUERY_STRING}
+#RewriteRule ^zivej-go-skopje/?([0-9]+)?$ index.php?controller=blog&action=main&cat=zivej-go-skopje&params=$1&%{QUERY_STRING}
+#RewriteRule ^kolumni/?([0-9]+)?$ index.php?controller=blog&action=main&cat=kolumni&params=$1&%{QUERY_STRING}
+
+RewriteRule ^zivot/?([0-9]+)?$ index.php?controller=blog&action=main&cat=zivot&params=$1&%{QUERY_STRING}
+RewriteRule ^kariera/?([0-9]+)?$ index.php?controller=blog&action=main&cat=kariera&params=$1&%{QUERY_STRING}
+RewriteRule ^finansii/?([0-9]+)?$ index.php?controller=blog&action=main&cat=finansii&params=$1&%{QUERY_STRING}
+#RewriteRule ^semejstvo/?([0-9]+)?$ index.php?controller=blog&action=main&cat=semejstvo&params=$1&%{QUERY_STRING}
+
+RewriteRule ^zanimlivosti/?([0-9]+)?$ index.php?controller=blog&action=main&cat=zanimlivosti&params=$1&%{QUERY_STRING}
+
+
+
+RewriteRule ^tag/(.*)$ index.php?controller=tags&action=main&params=$1&%{QUERY_STRING}
+RewriteRule ^horoskop/([a-z]+)$ index.php?controller=horoskop&action=sign&params=$1&%{QUERY_STRING}
+RewriteRule ^marketing$ index.php?controller=single-pages&action=marketing&params=$1&%{QUERY_STRING}
+RewriteRule ^za-nas$ index.php?controller=single-pages&action=za-nas&params=$1&%{QUERY_STRING}
+RewriteRule ^najnovi/?([0-9]+)?$ index.php?controller=single-pages&action=najnovi&params=$1&%{QUERY_STRING}
+
+
+RewriteRule ^([a-zA-Z0-9_-]+)/([0-9]+)$ index.php?controller=blog&action=single&params=$2&%{QUERY_STRING}
+
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9-]+)$ index.php?controller=$1&action=$2&%{QUERY_STRING}
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9-]+)/([a-zA-Z0-9\-\_\/]+)$ index.php?controller=$1&action=$2&params=$3&%{QUERY_STRING}
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?controller=$1&action=main&%{QUERY_STRING}
+RewriteRule ^([a-zA-Z0-9_-]+)/$ index.php?controller=$1&action=main&%{QUERY_STRING}
+
+RewriteRule ^images/([a-zA-Z0-9\.\/,_-]+)$ public/images/$1
+
+IndexIgnore *
+
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE application/x-js
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 1 seconds"
+ExpiresByType image/x-icon "access plus 2678400 seconds"
+ExpiresByType image/jpeg "access plus 2678400 seconds"
+ExpiresByType image/png "access plus 2678400 seconds"
+ExpiresByType image/gif "access plus 2678400 seconds"
+ExpiresByType application/x-shockwave-flash "access plus 2678400 seconds"
+ExpiresByType text/css "access plus 2678400 seconds"
+ExpiresByType text/javascript "access plus 32678400 seconds"
+ExpiresByType application/javascript "access plus 32678400 seconds"
+ExpiresByType application/x-javascript "access plus 32678400 seconds"
+ExpiresByType text/x-js "access plus 32678400 seconds"
+ExpiresByType text/html "access plus 1 seconds"
+ExpiresByType application/xhtml+xml "access plus 1 seconds"
+</IfModule>
+ 
+<ifModule mod_headers.c>
+Header unset ETag
+Header set Vary *
+</ifModule>
+ 
+FileETag None
