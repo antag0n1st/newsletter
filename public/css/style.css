@@ -1,0 +1,42 @@
+body{
+    margin: 0;
+    background-color: #c3c2c2;
+}
+
+.background1 {
+    background-color: #3e86fc;               
+    height: 135px; 
+}
+
+.center { 
+    background: white;
+    height: 590px;
+    width: 1150px;             
+    margin-top: 15px;         
+    margin-left: 65px;
+    box-shadow: 2px 3px 5px #9d9b9b; 
+    }
+    
+.center_other {
+    background-color: white;
+    width: 1150px;
+    margin-top: 15px;
+    margin-left: 65px;
+    padding-bottom: 40px;
+    box-shadow: 2px 3px 5px #9d9b9b;    
+}
+
+.container1 {  
+    overflow: hidden;   
+    height: 75px;
+    border-bottom: 1px solid #c3c2c2;
+}
+
+.container {  
+    overflow: hidden;   
+    height: 73px;
+    border-bottom: 1px solid #c3c2c2;
+}
+
+
+

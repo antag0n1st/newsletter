@@ -1,0 +1,351 @@
+
+/* Sing in page classes */
+
+.right-container{
+    float: right;
+    overflow: hidden;
+    width: 600px;    
+}
+
+.login-wrapper{
+    float: left;
+    width: 250px;
+    padding-top: 7px;
+}
+
+.text-left {
+    font-family: Ebrima;
+    font-size: 14pt;
+    color: #9d9b9b;
+    margin: 0;
+}
+
+.text-right {
+    font-family: Ebrima;
+    font-size: 14pt;
+    color: #9d9b9b;
+    margin: 0;
+}
+
+.login-title{
+    font-family: Ebrima;
+    font-size: 20pt;
+    color: white;
+    margin: 0;
+    padding-left: 89px;
+    padding-top: 10px;
+}
+
+.login{
+    float: left; 
+    padding:0;       
+    border-color: #9d9b9b;
+    border-width: 1.7px;
+    width: 200px;
+    height: 25px;
+}
+
+#username{
+    font-family: Ebrima;
+    font-size: 10pt;
+    color: #5d5d5e;
+}
+
+#password{
+    font-family: Ebrima;
+    font-size: 15pt;
+    color: #5d5d5e;
+}
+
+.login_button {
+    float: left; 
+    width: 100px;
+    padding-top: 20px;   
+}  
+
+#hover-img:hover { content: url('../images/signin_hover.png');
+                   width: 40px;
+                   height: 40px;
+}
+
+/*Active classes*/
+
+.loggedin-name {
+    font-family: Ebrima;
+    font-size: 15pt;
+    color: white;
+    margin: 0;
+    padding-left:60px;
+    padding-top: 0;
+
+}
+
+.signout {
+    font-family: Ebrima;
+    font-size: 10pt;
+    color: darkblue;
+    padding-left:61px;
+    text-decoration: none;    
+}
+
+.signout:hover { text-decoration: underline}
+
+#top-menu { 
+    padding-top: 22px;
+    width: 100%;
+    overflow: hidden;
+}
+
+#menu-wraper {
+    width: 100%;
+    overflow: hidden        
+}
+.menu-active {
+    width: 100px;
+    padding: 5px;
+    padding-top: 12px;
+    margin-left: 110px;
+    text-align: center;
+    font-family: Ebrima;
+    font-size: 25px;
+    color: #4c4c4c;
+    float: left;
+    text-decoration: none;
+}
+
+.active { border-bottom: #3e86fc solid 2px;}
+
+
+.menu-list { 
+    width: 150px;
+    padding: 5px;
+    padding-top: 12px;
+    margin-left: 140px;
+    font-family: Ebrima;
+    font-size: 25px;
+    text-decoration: none;
+    text-align: center;
+    color: #4c4c4c;
+    float: left;
+    overflow: hidden;
+}
+
+.menu-list:hover { border-bottom: #3e86fc solid 2px;
+}
+.menu-active:hover { border-bottom: #3e86fc solid 2px;}
+
+
+.menu-other {
+    width: 150px;
+    padding: 5px;
+    padding-top: 12px;
+    margin-left: 100px;
+    font-family: Ebrima;
+    font-size: 25px;
+    text-decoration: none;
+    text-align: center;
+    color: #4c4c4c;
+    float: left;
+    overflow: hidden;        
+}
+
+.menu-other:hover { border-bottom: #3e86fc solid 2px;
+}
+
+/* Table adjustments */
+
+.table {
+    width: 100%;
+    padding-left: 50px;
+    padding-top: 50px;
+
+}
+
+.center_other table { font-family: Ebrima; 
+        border-collapse: collapse; 
+        width: 1050px;
+        text-align: center;
+
+}
+.center_other table { border: gray 1px solid ; }
+.center_other th { border-bottom: gray 1px solid; }
+.center_other td { padding-bottom: 7px;
+     padding-top: 7px;
+     border-bottom: gray 1px solid;
+}
+
+#title-line { 
+    background-color: lightgray;
+    color: #4c4c4c;
+    font-size: 14pt
+
+}  
+
+.colid { border-right: gray 1px solid; }
+
+.link { 
+    font-family: Ebrima;
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover { text-decoration: underline;
+              color: gray;                  
+}
+
+.button-adjustment {
+    padding-top: 5px;
+}
+
+.pause-hover:hover { content: url('../images/pause_hover.png');
+                     width: 70px;
+                     height: 20px;
+}
+
+.stop-hover:hover { content: url('../images/stop_hover.png');
+                    width: 70px;
+                    height: 20px;
+}
+
+.play-hover:hover { content: url('../images/play_hover.png');
+                    width: 70px;
+                    height: 20px;
+} 
+
+/* Clients_List */
+
+.submenu { background-color: #b2cefd;
+           height: 32px;
+           margin-right: 120px;
+           margin-left: 120px;
+           margin-top: 20px;
+
+}
+
+.submenu-active { 
+    font-family: Ebrima;
+    color: #4c4c4c;
+    font-size: 17pt;
+    padding-left: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    float: left;
+    width: 100px;
+        
+
+}
+
+.submenu-list {font-family: Ebrima;
+               color: #4c4c4c;
+               font-size: 17pt;
+               padding-left: 30px;
+               text-decoration: none;;
+               float: left;
+               width: 100px;
+                   
+}
+
+.submenu_hover:hover { font-weight: bold}
+
+.edit-hover:hover {content: url('../images/edit_hover.png');
+                   text-decoration: none;
+}
+
+.save-hover:hover {content: url('../images/save_hover.png');                  
+}
+
+.select1 { width: 120px;
+         font-family: Ebrima;
+                 
+}
+
+.select2 { width: 70px;
+            font-family: Ebrima;
+}
+
+
+/* Newsletter-Add */
+
+.add_title {
+    border-color: #9d9b9b;
+    border-width: 1.7px;
+    width: 200px;
+    height: 25px;
+}
+
+.add-title {
+    font-family: Ebrima;
+    font-size: 13pt;
+    text-align: left;
+    color: #5d5d5e;
+    padding-left: 15px;
+}
+
+.title-in-add { 
+        margin-top: 50px;
+        margin-left: 118px;
+
+}
+
+.textarea { width: 550px;
+            margin-left: 118px;
+            margin-top: 30px;
+}
+
+.select3 {
+    margin-top: 20px;
+    margin-left: 118px;
+    width: 215px;
+    height: 27px;
+}
+
+.save-add {
+    margin-top: 40px;
+    margin-left: 118px;
+}
+
+/* Clienst - list */
+
+.view-hover:hover {
+    content: url('../images/view_hover.png');
+    text-decoration: none;
+}
+
+.delite-hover:hover {content: url('../images/delite_hover.png');
+       text-decoration: none;
+}
+
+.link2 { font-family: Ebrima;
+        text-decoration: none;
+        width: 20px;
+        padding-left: 20px;
+}
+
+/* Clienst-new */
+
+.send-hover:hover {content: url('../images/send_hover.png');
+       text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+    Created on : Feb 3, 2015, 10:06:50 AM
+    Author     : Elena
+*/
+
