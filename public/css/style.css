@@ -10,12 +10,13 @@ body{
 
 .center { 
     background: white;
-    height: 590px;
+    min-height: 590px;
     width: 1287px;             
     margin: 15px auto 0 auto;    
     box-shadow: 2px 3px 5px #9d9b9b; 
-    }
-    
+    padding-bottom: 40px;
+}
+
 
 .container1 {  
     overflow: hidden;   
@@ -27,7 +28,7 @@ body{
     width: 1300px;
     margin: 0 auto;
     overflow: hidden;
-      
+
 }
 
 

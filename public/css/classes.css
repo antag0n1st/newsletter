@@ -117,12 +117,12 @@
 
 
 .menu-list { 
-    width: 150px;
+    width: 120px;
     padding: 5px;
-    padding-top: 11px;
-    margin-left: 140px;
+    padding-top: 14px;
+    margin-left: 60px;
     font-family: Ebrima;
-    font-size: 25px;
+    font-size: 22px;
     text-decoration: none;
     text-align: center;
     color: #4c4c4c;
@@ -130,9 +130,14 @@
     overflow: hidden;
 }
 
-.menu-list:hover { border-bottom: #3e86fc solid 2px;
+
+
+.menu-list:hover { 
+    border-bottom: #3e86fc solid 2px;
 }
-.menu-active:hover { border-bottom: #3e86fc solid 2px;}
+.menu-active:hover { 
+    border-bottom: #3e86fc solid 2px;
+}
 
 
 .menu-other {
@@ -161,17 +166,17 @@
 }
 
 .wrapper table { font-family: Ebrima; 
-        border-collapse: collapse; 
-        width: 1050px;
-        text-align: center;
+                 border-collapse: collapse; 
+                 width: 1050px;
+                 text-align: center;
 
 }
 
 .wrapper table { border: gray 1px solid ; }
 .wrapper th { border-bottom: gray 1px solid; }
 .wrapper td { padding-bottom: 7px;
-     padding-top: 7px;
-     border-bottom: gray 1px solid;
+              padding-top: 7px;
+              border-bottom: gray 1px solid;
 }
 
 #title-line { 
@@ -215,7 +220,7 @@
 /* Clients_List */
 
 .submenu { background-color: #b2cefd;
-           height: 32px;
+           height: 24px;
            margin-right: 120px;
            margin-left: 120px;
            margin-top: 20px;
@@ -225,24 +230,24 @@
 .submenu-active { 
     font-family: Ebrima;
     color: #4c4c4c;
-    font-size: 17pt;
+    font-size: 18px;
     padding-left: 30px;
     font-weight: bold;
     text-decoration: none;
     float: left;
     width: 100px;
-        
+
 
 }
 
 .submenu-list {font-family: Ebrima;
                color: #4c4c4c;
-               font-size: 17pt;
+               font-size: 18px;
                padding-left: 30px;
                text-decoration: none;;
                float: left;
                width: 100px;
-                   
+
 }
 
 .submenu_hover:hover { font-weight: bold}
@@ -255,12 +260,12 @@
 }
 
 .select1 { width: 120px;
-         font-family: Ebrima;
-                 
+           font-family: Ebrima;
+
 }
 
 .select2 { width: 70px;
-            font-family: Ebrima;
+           font-family: Ebrima;
 }
 
 
@@ -282,8 +287,8 @@
 }
 
 .title-in-add { 
-        margin-top: 50px;
-        margin-left: 118px;
+    margin-top: 50px;
+    margin-left: 118px;
 
 }
 
@@ -312,19 +317,19 @@
 }
 
 .delite-hover:hover {content: url('../images/delite_hover.png');
-       text-decoration: none;
+                     text-decoration: none;
 }
 
 .link2 { font-family: Ebrima;
-        text-decoration: none;
-        width: 20px;
-        padding-left: 20px;
+         text-decoration: none;
+         width: 20px;
+         padding-left: 20px;
 }
 
 /* Clienst-new */
 
 .send-hover:hover {content: url('../images/send_hover.png');
-       text-decoration: none;
+                   text-decoration: none;
 }
 
 /* test */
@@ -332,21 +337,15 @@
 .more {margin-right: 10px; }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.post-error{
+    color: white;
+    background-color: #f11a2c;
+    padding: 10px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    display: none;
+}
 
 /* 
     Created on : Feb 3, 2015, 10:06:50 AM

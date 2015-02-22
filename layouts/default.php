@@ -6,7 +6,9 @@
     <head>
         <?php Head::instance()->display(); ?>
     </head>
-    <body>   
+    <body>  
+        
+        <?php Load::view('elements/error'); ?>
 
         <div class="background1"> 
             <div class="wrapper">
