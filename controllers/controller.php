@@ -58,6 +58,10 @@ class Controller {
             }
         }
     }
+    
+    protected function get_post($value){
+        return isset($_POST[$value]) ? $_POST[$value] : "";
+    }
 }
 
 ?>
