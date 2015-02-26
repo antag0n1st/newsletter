@@ -42,6 +42,12 @@
     <div class="submenu"> 
         <div> 
             <a href="<?php echo URL::abs('groups'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'details' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Details 
+            </a> 
+        </div>
+        <div> 
+            <a href="<?php echo URL::abs('groups/lista'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'list' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 List 
             </a> 

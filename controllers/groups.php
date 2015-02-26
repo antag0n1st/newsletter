@@ -8,6 +8,37 @@ class GroupsController extends Controller {
         global $_active_page_submenu_;
 
         $_active_page_ = 'groups';
+        $_active_page_submenu_ = 'details';
+        $view = "details";
+    }
+
+    public function search() {
+
+        global $layout;
+        $layout = null;
+
+        $key = $this->get_post('key');
+        $value = $this->get_post('value');
+
+        Load::model('group');
+
+        if ($key == 'group_name') {
+            $groups = Group::get_by_field('group_name', $value);
+            echo json_encode($groups);
+        } else if ($key == 'contact_name') {
+            $groups = Group::get_by_field('contact_name', $value);
+            echo json_encode($groups);
+        } else {
+            echo json_encode([]);
+        }
+    }
+
+    public function lista() {
+        global $view;
+        global $_active_page_;
+        global $_active_page_submenu_;
+
+        $_active_page_ = 'groups';
         $_active_page_submenu_ = 'list';
         $view = "list";
 
@@ -64,7 +95,7 @@ class GroupsController extends Controller {
 
             $group->save();
 
-            URL::redirect('groups');
+            URL::redirect('groups/lista');
         }
     }
 

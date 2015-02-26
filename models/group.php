@@ -20,7 +20,6 @@ class Group extends Model {
         'comment',
         'created_at'
     );
-    
     public $id;
     public $category_id;
     public $group_name;
@@ -39,6 +38,27 @@ class Group extends Model {
     public static function get_all_groups() {
         $query = "SELECT * FROM " . Group::$table_name . " ORDER BY id DESC";
         return Group::find_by_sql($query);
+    }
+
+    public static function get_by_field($field,$value) {
+       
+        if(!$value){ return []; }
+        
+        $query = " SELECT g.* , c.category_name , cc.country_name FROM groups as g ";
+        $query .= " JOIN categories as c ON g.category_id = c.id";
+        $query .= " JOIN countries as cc ON g.country_id = cc.id";
+        $query .= " WHERE g.".$field." LIKE '%" . Model::db()->prep($value) . "%' ";
+        $query .= " ORDER BY g.id DESC";
+        
+        //return [$query];
+        
+        $result = Model::db()->query($query);
+        $groups = array();
+        while ($row = Model::db()->fetch_assoc($result)) {
+            $groups[] = $row;
+        }
+
+        return $groups;
     }
 
 }
