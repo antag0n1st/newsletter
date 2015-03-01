@@ -24,12 +24,14 @@ class Model{
     }
 
     public static function find_by_id($id = 0) {
-        $result_array = static::find_by_sql("SELECT * FROM " . static::$table_name . " WHERE ".static::$id_name."='{$id}' LIMIT 1");
+        $result_array = static::find_by_sql("SELECT * FROM " . static::$table_name 
+                . " WHERE ".static::$id_name."='".Model::db()->prep($id)."' LIMIT 1");
         return!empty($result_array) ? array_shift($result_array) : false;
     }
     
     public static  function delete_by_id($id){
-        Model::db()->query("DELETE FROM " . static::$table_name . " WHERE ".static::$id_name."='{$id}' LIMIT 1");
+        Model::db()->query("DELETE FROM " . static::$table_name 
+                . " WHERE ".static::$id_name."='".Model::db()->prep($id)."' LIMIT 1");
         return Model::db()->affected_rows_count();
     }
 
