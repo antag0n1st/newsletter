@@ -4,7 +4,7 @@
             <?php global $_active_page_;
             global $_active_page_submenu_; ?>
             <div> 
-                <a style="margin-left: 180px;" href="<?php echo URL::abs('groups'); ?>" 
+                <a style="margin-left: 120px;" href="<?php echo URL::abs('groups'); ?>" 
                    class="menu-list <?php echo $_active_page_ == 'groups' ? 'active' : ''; ?>"> 
                     Groups 
                 </a> 
@@ -31,6 +31,12 @@
                 <a href="<?php echo URL::abs('hotels'); ?>" 
                    class="menu-list <?php echo $_active_page_ == 'hotels' ? 'active' : ''; ?>"> 
                     Hotels 
+                </a> 
+            </div>
+            <div> 
+                <a href="<?php echo URL::abs('newsletter'); ?>" 
+                   class="menu-list <?php echo $_active_page_ == 'newsletter' ? 'active' : ''; ?>"> 
+                    Newsletter 
                 </a> 
             </div>
         </div>
@@ -123,6 +129,29 @@
         <div> 
             <a href="<?php echo URL::abs('events/add'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'add' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Add 
+            </a> 
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php if ($_active_page_ == 'newsletter'): ?>
+    <div class="submenu"> 
+        <div> 
+            <a href="<?php echo URL::abs('newsletter'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'overview' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Overview 
+            </a> 
+        </div>
+        <div> 
+            <a href="<?php echo URL::abs('newsletter/templates'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'templates' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Templates 
+            </a> 
+        </div>
+        <div> 
+            <a href="<?php echo URL::abs('newsletter/add-template'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'add_template' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 Add 
             </a> 
         </div>
