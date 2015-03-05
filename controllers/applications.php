@@ -10,11 +10,6 @@ class ApplicationsController extends Controller {
         $_active_page_ = 'applications';
         $_active_page_submenu_ = 'list';
         $view = "list";
-
-//        Load::model('event');
-//        $events = Event::get_all_events();
-//        Load::assign('events', $events);
-        
     }
     
     public function add(){
