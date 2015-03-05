@@ -15,7 +15,7 @@
             <?php foreach ($events as $key => $event): /* @var $event Event */ ?>
                 <tr>
                     <td> <?php echo $event->id; ?> </td>
-                    <td> <?php echo $event->event_name; ?> </td>
+                    <td> <?php echo $event->festival_name; ?> </td>
                     <td> 
                         <?php
                             if ($event->event_started_at == 0) {

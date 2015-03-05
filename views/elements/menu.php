@@ -4,9 +4,15 @@
             <?php global $_active_page_;
             global $_active_page_submenu_; ?>
             <div> 
-                <a style="margin-left: 120px;" href="<?php echo URL::abs('groups'); ?>" 
+                <a style="margin-left: 60px;" href="<?php echo URL::abs('groups'); ?>" 
                    class="menu-list <?php echo $_active_page_ == 'groups' ? 'active' : ''; ?>"> 
                     Groups 
+                </a> 
+            </div>
+            <div> 
+                <a href="<?php echo URL::abs('applications'); ?>" 
+                   class="menu-list <?php echo $_active_page_ == 'applications' ? 'active' : ''; ?>"> 
+                    Applications 
                 </a> 
             </div>
             <div> 
@@ -122,14 +128,26 @@
     <div class="submenu"> 
         <div> 
             <a href="<?php echo URL::abs('events'); ?>" 
-               class="<?php echo $_active_page_submenu_ == 'list' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
-                List 
+               class="<?php echo $_active_page_submenu_ == 'list_events' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                List Events
             </a> 
         </div>
         <div> 
-            <a href="<?php echo URL::abs('events/add'); ?>" 
-               class="<?php echo $_active_page_submenu_ == 'add' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
-                Add 
+            <a href="<?php echo URL::abs('events/add-event'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'add_event' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Add Event
+            </a> 
+        </div>        
+        <div> 
+            <a href="<?php echo URL::abs('events/list-festivals'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'list_festivals' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                List Festivals
+            </a> 
+        </div>
+        <div> 
+            <a href="<?php echo URL::abs('events/add-festival'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'add_festival' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Add Festival
             </a> 
         </div>
     </div>
@@ -152,6 +170,23 @@
         <div> 
             <a href="<?php echo URL::abs('newsletter/add-template'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'add_template' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Add 
+            </a> 
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php if ($_active_page_ == 'applications'): ?>
+    <div class="submenu"> 
+        <div> 
+            <a href="<?php echo URL::abs('applications'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'list' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                List 
+            </a> 
+        </div>
+        <div> 
+            <a href="<?php echo URL::abs('applications/add'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'add' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 Add 
             </a> 
         </div>
