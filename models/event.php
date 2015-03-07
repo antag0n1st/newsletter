@@ -36,5 +36,24 @@ class Event extends Model {
         
         return $events;
     }
+    
+    public static function find_events($term) {
+
+        $query = " SELECT e.* ,c.country_name , f.festival_name FROM events as e ";
+        $query .= " JOIN festivals as f ON e.festival_id = f.id ";
+        $query .= " JOIN countries as c ON f.country_id = c.id ";
+        $query .= " WHERE f.festival_name like '%" . Model::db()->prep($term) . "%' ";
+
+        $result = Model::db()->query($query);
+
+        $groups = array();
+
+        while ($row = Model::db()->fetch_assoc($result)) {
+           $row['event_started_at'] = date('d M Y', strtotime($row['event_started_at']));
+            $groups[] = $row;
+        }
+
+        return $groups;
+    }
 
 }

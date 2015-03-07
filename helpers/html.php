@@ -41,6 +41,20 @@ class HTML {
             echo $textfield;
         }
     }
+    
+    public static function input_hidden($name = "", $attr = array(), $return = false) {
+
+        $textfield = "<input type=\"hidden\"";
+        $textfield .= " name=\"" . $name . "\" id=\"" . $name . "\"";
+        $textfield .= isset($_POST[$name]) ? " value=\"" . $_POST[$name] . "\"" : "";
+        $textfield .= " />";
+
+        if ($return) {
+            return $textfield;
+        } else {
+            echo $textfield;
+        }
+    }
 
     public static function textarea($name = "", $class = "", $style = "", $attr = array(), $return = false) {
         $textarea = "<textarea";

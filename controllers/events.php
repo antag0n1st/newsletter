@@ -60,7 +60,7 @@ class EventsController extends Controller {
         $_active_page_ = 'events';
         $_active_page_submenu_ = 'add_festival';
         $view = "add_festival";
-        
+
         Head::instance()->load_css('jquery-ui');
         Head::instance()->load_js('jquery-ui.min');
 
@@ -80,19 +80,29 @@ class EventsController extends Controller {
             URL::redirect('events/list-festivals');
         }
     }
-    
-    public function get_festivals(){
+
+    public function get_festivals() {
         global $layout;
         $layout = null;
-        if( isset($_GET['term']) and $_GET['term']){
+        if (isset($_GET['term']) and $_GET['term']) {
             Load::model('festival');
             $festivals = Festival::find_festivals($_GET['term']);
             echo json_encode($festivals);
         } else {
             echo json_encode([]);
-        } 
-        
-        
+        }
+    }
+
+    public function get_events() {
+        global $layout;
+        $layout = null;
+        if (isset($_GET['term']) and $_GET['term']) {
+            Load::model('event');
+            $events = Event::find_events($_GET['term']);
+            echo json_encode($events);
+        } else {
+            echo json_encode([]);
+        }
     }
 
     public function list_festivals() {
@@ -103,17 +113,17 @@ class EventsController extends Controller {
         $_active_page_ = 'events';
         $_active_page_submenu_ = 'list_festivals';
         $view = "list_festivals";
-        
+
         Load::model('festival');
-        
+
         Load::model('country');
         $country_records = Country::find_all();
         $countries = array();
-        foreach($country_records as $key => $country){ /* @var $country Country */
-            $countries[$country->id] = $country->country_name; 
+        foreach ($country_records as $key => $country) { /* @var $country Country */
+            $countries[$country->id] = $country->country_name;
         }
         Load::assign('countries', $countries);
-        
+
         $festivals = Festival::get_all_festivals();
         Load::assign('festivals', $festivals);
     }

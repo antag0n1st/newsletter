@@ -27,7 +27,8 @@ class Application extends Model {
         'invitation_price',
         'invoice_price',
         'invoice_is_paid',
-        'group_manager'
+        'group_manager',
+        'created_at'
     );
     
     public $id;
@@ -53,5 +54,6 @@ class Application extends Model {
     public $invoice_price;
     public $invoice_is_paid;
     public $group_manager;
+    public $created_at;
 
 }

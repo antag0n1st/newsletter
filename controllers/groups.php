@@ -99,4 +99,16 @@ class GroupsController extends Controller {
         }
     }
 
+    public function get_groups() {
+        global $layout;
+        $layout = null;
+        if (isset($_GET['term']) and $_GET['term']) {
+            Load::model('group');
+            $groups = Group::find_groups($_GET['term']);
+            echo json_encode($groups);
+        } else {
+            echo json_encode([]);
+        }
+    }
+
 }
