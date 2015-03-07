@@ -35,15 +35,9 @@
         };
     });
 
-    function create_picker_by_id(id) {
-        $(id).datepicker({
-            inline: true
-        });
+    
 
-        $(id).datepicker("option", "dateFormat", 'dd-mm-yy');
-    }
-
-    create_picker_by_id('#start-date-datepicker');
-    create_picker_by_id('#end-date-datepicker');
+    create_picker_by_id('start-date-datepicker');
+    create_picker_by_id('end-date-datepicker');
 
 </script>

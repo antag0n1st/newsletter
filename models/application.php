@@ -15,6 +15,11 @@ class Application extends Model {
         'date_of_departure',
         'needs_airport_pickup',
         'number_of_rooms',
+        'room_1',
+        'room_2',
+        'room_3',
+        'room_4',
+        'room_5',
         'remarks',
         'application_is_sent',
         'application_has_answer',
@@ -35,6 +40,11 @@ class Application extends Model {
     public $date_of_departure;
     public $needs_airport_pickup;
     public $number_of_rooms;
+    public $room_1;
+    public $room_2;
+    public $room_3;
+    public $room_4;
+    public $room_5;
     public $remarks;
     public $application_is_sent;
     public $application_has_answer;

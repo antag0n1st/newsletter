@@ -104,6 +104,23 @@ class TimeHelper
             return "$diff $term ";
 
     }
+    
+    /**
+     * 
+     * @param type $input_date "dd-mm-yyyy"
+     * @return type "yyyy/mm/dd"
+     */
+    public static function reorder_date($input_date) {
+
+        if (isset($input_date) and $input_date) {
+            $parts = explode('-', $input_date);
+            if (count($parts) == 3) {
+                return $parts[2] . '/' . $parts[1] . '/' . $parts[0];
+            }
+        }
+
+        return null;
+    }
 
 }
 ?>
