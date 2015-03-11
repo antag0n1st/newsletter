@@ -37,7 +37,7 @@ class EventsController extends Controller {
             Load::model('event');
 
             if ($_POST['start_date'] > $_POST['end_date'] and $_POST['end_date'] != 0) {
-                $_POST['error'] = "The starting time is grater then the ending";
+                $this->set_error('The starting time is grater then the ending');
             } else {
                 $event = new Event();
                 $event->festival_id = $this->get_post('festival_id');

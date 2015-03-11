@@ -10,6 +10,68 @@ class ApplicationsController extends Controller {
         $_active_page_ = 'applications';
         $_active_page_submenu_ = 'list';
         $view = "list";
+        
+        Load::model('application');
+        
+        $applications = Application::list_of_applications();
+        Load::assign('applications', $applications);
+        
+    }
+    
+    public function details($id = 0){
+        global $view;
+        global $_active_page_;
+        global $_active_page_submenu_;
+
+        $_active_page_ = 'applications';
+        $_active_page_submenu_ = 'details';
+        $view = "details";
+        
+        Load::model('application');
+        
+        /* @var $application Application */
+        
+        if(isset($_POST) and $_POST){
+            
+            $application = Application::find_by_id($id);
+            
+            $application->remarks = $this->get_post('remarks');
+            $application->application_is_sent = $this->value_for_checkbox('application_is_sent');
+            $application->application_has_answer = $this->value_for_checkbox('applications_has_answer');
+            $application->invitation_is_sent = $this->value_for_checkbox('invitation_is_sent');
+            $application->invitation_price = $this->get_post('invitation_price');
+            $application->invoice_price = $this->get_post('invoice_price');
+            $application->invoice_is_paid = $this->value_for_checkbox('invoice_is_paid');
+            
+            $application->save();
+            
+            $this->set_confirmation('The Application was updated');
+        }
+        
+        
+        $application = Application::get_application_by_id($id);
+        Load::assign('application', $application);
+        
+        Load::assign('id', $id);
+    }
+    
+    public function list_by_filter($filter){
+        
+        global $view;
+        global $_active_page_;
+        global $_active_page_submenu_;
+
+        $_active_page_ = 'applications';
+        $_active_page_submenu_ = $filter;
+        $view = "list";
+        
+        Load::model('application');
+        
+        $applications = Application::list_of_applications($filter);
+        Load::assign('applications', $applications);
+        
+        Load::assign('filter', str_replace("-", " ", $filter));
+        
     }
 
     public function add() {
@@ -35,28 +97,28 @@ class ApplicationsController extends Controller {
             $date_of_arrival = TimeHelper::reorder_date($date_of_arrival);
             $date_of_departure = TimeHelper::reorder_date($date_of_departure);
 
-            if (!$date_of_arrival or ! $date_of_departure) {
-                $_POST['error'] = "You must set arrival and departure date";
-                return;
-            }
-
-            if ($date_of_arrival > $date_of_departure and $date_of_departure) {
-                $_POST['error'] = "Can't departure before arrival";
-                return;
-            }
-
             if (!$_POST['group_id']) {
-                $_POST['error'] = "Must set valid group";
+                $this->set_error('Must set valid group');
                 return;
             }
 
             if (!$_POST['event_id']) {
-                $_POST['error'] = "Must set valid event";
+                $this->set_error('Must set valid event');
                 return;
             }
 
             if (!$_POST['hotel_id']) {
-                $_POST['error'] = "Must set valid hotel";
+                $this->set_error('Must set valid hotel');
+                return;
+            }
+            
+            if (!$date_of_arrival or ! $date_of_departure) {
+                $this->set_error('You must set arrival and departure date');
+                return;
+            }
+
+            if ($date_of_arrival > $date_of_departure and $date_of_departure) {
+                $this->set_error("Can't departure before arrival");
                 return;
             }
 

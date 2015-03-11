@@ -184,11 +184,50 @@
                 List 
             </a> 
         </div>
+        
+        <div> 
+            <a href="<?php echo URL::abs('applications/list-by-filter/application-is-not-sent'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'application-is-not-sent' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                App Not Sent
+            </a> 
+        </div>
+        
+        <div> 
+            <a href="<?php echo URL::abs('applications/list-by-filter/application-is-sent'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'application-is-sent' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                App Sent
+            </a> 
+        </div>
+        
+        <div> 
+            <a href="<?php echo URL::abs('applications/list-by-filter/application-is-answered'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'application-is-answered' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                App Answered
+            </a> 
+        </div>
+        
+        <div> 
+            <a href="<?php echo URL::abs('applications/list-by-filter/invitation-is-sent'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'invitation-is-sent' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Invitation Sent
+            </a> 
+        </div>
+        
+        <div> 
+            <a href="<?php echo URL::abs('applications/list-by-filter/invoice-is-paid'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'invoice-is-paid' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Paid
+            </a> 
+        </div>
+        
         <div> 
             <a href="<?php echo URL::abs('applications/add'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'add' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 Add 
             </a> 
         </div>
+        
+        
+        
     </div>
 <?php endif; ?>

@@ -14,11 +14,16 @@ class HTML {
         }
     }
 
-    public static function checkbox($name, $class = "", $value = "yes", $style = "", $attr = array(), $return = false) {
+    public static function checkbox($name, $class = "", $value = "yes", $style = "", $attr = array(), $return = false,$is_checked = false) {
 
         $checkbox = "<input type=\"checkbox\" name=\"" . $name . "\" id=\"" . $name . "\" ";
         $checkbox .= " value=\"" . $value . "\" class=\"" . $class . "\" style=\"" . $style . "\" ";
-        $checkbox .= (isset($_POST[$name]) and $_POST[$name] == $value) ? "checked=\"checked\"" : "";
+        if($is_checked){
+            $checkbox .= " checked=\"checked\"";
+        } else {
+            $checkbox .= (isset($_POST[$name]) and $_POST[$name] == $value) ? "checked=\"checked\"" : "";
+        }
+        
         $checkbox .= " />";
         if ($return) {
             return $checkbox;
@@ -27,12 +32,17 @@ class HTML {
         }
     }
 
-    public static function textfield($name = "", $class = "", $style = "", $attr = array(), $return = false) {
+    public static function textfield($name = "", $class = "", $style = "", $attr = array(), $return = false,$value = "") {
 
         $textfield = "<input type=\"text\"";
         $textfield .= " name=\"" . $name . "\" id=\"" . $name . "\"";
         $textfield .= " class=\"" . $class . "\" style=\"" . $style . "\"";
-        $textfield .= isset($_POST[$name]) ? " value=\"" . $_POST[$name] . "\"" : "";
+        if($value){
+            $textfield .= " value=\"" . $value . "\"";
+        } else {
+            $textfield .= isset($_POST[$name]) ? " value=\"" . $_POST[$name] . "\"" : "";
+        }
+        
         $textfield .= " />";
 
         if ($return) {
@@ -56,12 +66,16 @@ class HTML {
         }
     }
 
-    public static function textarea($name = "", $class = "", $style = "", $attr = array(), $return = false) {
+    public static function textarea($name = "", $class = "", $style = "", $attr = array(), $return = false,$initial_text = null) {
         $textarea = "<textarea";
         $textarea .= " name=\"" . $name . "\" id=\"" . $name . "\"";
         $textarea .= " class=\"" . $class . "\" style=\"" . $style . "\"";
         $textarea .= " >";
-        $textarea .= isset($_POST[$name]) ? $_POST[$name] : "";
+        if($initial_text){
+            $textarea .= $initial_text;
+        } else {
+            $textarea .= isset($_POST[$name]) ? $_POST[$name] : "";
+        }        
         $textarea .= " </textarea>";
 
         if ($return) {

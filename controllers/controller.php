@@ -62,6 +62,14 @@ class Controller {
     protected function get_post($value){
         return isset($_POST[$value]) ? $_POST[$value] : "";
     }
+    
+    protected function set_error($error){
+        $_POST['_error'] = $error;
+    }
+    
+    protected function set_confirmation($confirmation){
+        $_POST['_confirmation'] = $confirmation;
+    }
 }
 
 ?>
