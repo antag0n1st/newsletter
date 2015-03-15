@@ -231,11 +231,11 @@
     font-family: Ebrima;
     color: #4c4c4c;
     font-size: 18px;
-    padding-left: 20px;
-    font-weight: bold;
+    padding-left: 60px;
+    color: black;
     text-decoration: none;
     float: left;
-    width: 110px;
+    
 
 
 }
@@ -243,14 +243,14 @@
 .submenu-list {font-family: Ebrima;
                color: #4c4c4c;
                font-size: 18px;
-               padding-left: 20px;
+               padding-left: 60px;
                text-decoration: none;;
                float: left;
-               width: 110px;
+               
 
 }
 
-.submenu_hover:hover { font-weight: bold}
+.submenu_hover:hover { color: black}
 
 .edit-hover:hover {content: url('../images/edit_hover.png');
                    text-decoration: none;
@@ -356,6 +356,52 @@
     width: 100%;
     display: none;
 }
+
+
+/* Grousp-details */
+
+.details1 { 
+    padding-left: 120px;
+    padding-top: 30px;
+}
+
+.collum1 { width: 100px;
+          display: block;
+          float: left;
+          line-height: 30px;
+          text-align: right;
+          padding-right: 10px;
+                    
+        }
+.collum2 { width: 250px;
+          display: block;
+          float: left;
+          line-height: 30px;
+          font-family: Ebrima;
+          }
+
+.text { font-family: Ebrima;
+        color: black;
+        font-size: 15px;
+}
+
+.details2 {
+    overflow: hidden;
+    width: 100%;
+    padding-top: 50px;
+}
+
+.history {
+    float: left;
+    padding-left: 195px;
+      
+}
+
+.input-text { font-family: Ebrima;}
+
+
+
+
 
 /* 
     Created on : Feb 3, 2015, 10:06:50 AM
