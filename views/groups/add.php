@@ -1,54 +1,88 @@
 
-<div style="padding-left: 30px;">
+<div class="details1">
     <form onsubmit="before_submit();" id="add-group" name="form" method="post" action="<?php echo URL::abs('groups/add'); ?>">
-        <br />
-        name:  <input name="group_name" type="text" <?php HTML::post_value('group_name'); ?> /> <br /> <br />
-        contact name: <input name="contact_name" type="text" <?php HTML::post_value('contact_name'); ?> /> <br /> <br />
 
-        email: <input name="email" type="text" <?php HTML::post_value('email'); ?> /> <br /> <br />
-
-        <div>
-            <div id="other_emails"></div>
-            <div> <input id="add_email" type="button" value="add email" /> </div>
+        <div class="collum1 text"> 
+            name:
+            <br/>
+            contact name:
+            <br/>
+            manager:
+            <br/>
+            categories:
         </div>
-        <br />
-        <!-- RENDER OTHER EMAIL -->
 
-        phone <input name="phone" type="text" <?php HTML::post_value('phone'); ?> /> <br /> <br />
+        <div class="collum2">
+            <input name="group_name" type="text" <?php HTML::post_value('group_name'); ?> /> 
+            <input name="contact_name" type="text" <?php HTML::post_value('contact_name'); ?> /> 
+            <input name="manager" type="text" <?php HTML::post_value('manager'); ?> /> 
+            <select name="category_id">
 
-        country: <select name="country_id">
+                <?php foreach ($categories as $key => $category): /* @var $category Category */ ?>
 
-            <?php foreach ($countries as $key => $country): /* @var $country Country */ ?>
+                    <option <?php HTML::post_selected($key, 'category_id', $category->id); ?> >
+                        <?php echo $category->category_name; ?>
+                    </option>
 
-                <option <?php HTML::post_selected($key, 'country_id', $country->id); ?> >
-                    <?php echo $country->country_name; ?>
-                </option>
+                <?php endforeach; ?>
 
-            <?php endforeach; ?>
+            </select>
+        </div>        
+        <div class="collum1 text">
+            address:
+            <br/>
+            city:
+            <br/>
+            country:  
+        </div>
+        <div class="collum2">
+            <input name="address" type="text" <?php HTML::post_value('address'); ?> /> 
+            <input name="city" type="text" <?php HTML::post_value('city'); ?> /> 
+            <select name="country_id">
 
-        </select>
-        <br /> <br />
-        city: <input name="city" type="text" <?php HTML::post_value('city'); ?> /> <br /> <br />
-        address: <input name="address" type="text" <?php HTML::post_value('address'); ?> /> <br /> <br />
-        website: <input name="website" type="text" <?php HTML::post_value('website'); ?> /> <br /> <br />
+                <?php foreach ($countries as $key => $country): /* @var $country Country */ ?>
+
+                    <option <?php HTML::post_selected($key, 'country_id', $country->id); ?> >
+                        <?php echo $country->country_name; ?>
+                    </option>
+
+                <?php endforeach; ?>
+
+            </select>
+        </div>
+        <div class="collum1 text">
+            phone:
+            <br/>
+            website:
+            <br/>
+            email:
+        </div>
+        <div class="collum2">
+            <input name="phone" type="text" <?php HTML::post_value('phone'); ?> /> 
+            <input name="website" type="text" <?php HTML::post_value('website'); ?> /> 
+            <div>
+            <div id="other_emails"></div>
+            <div> <input class="addemail" id="add_email" type="button" /> </div>
+        </div>
+        <input name="email" type="text" <?php HTML::post_value('email'); ?> /> 
         
+             <input id="other_emails_hidden_field" type="hidden" value="" name="other_emails" />
+        <!-- RENDER OTHER EMAIL -->
+            
+            </div>
+        
+        <div class="details2">
+             <div class="collum1 text">
+                 comment: 
+                 </div>
+            <div class="collum2">
+                <textarea name="comment"> <?php echo isset($_POST['comment']) ? $_POST['comment'] : ""; ?> </textarea>
+                </div>
+       </div>
 
-        categories: <select name="category_id">
-
-            <?php foreach ($categories as $key => $category): /* @var $category Category */ ?>
-
-                <option <?php HTML::post_selected($key, 'category_id', $category->id); ?> >
-                    <?php echo $category->category_name; ?>
-                </option>
-
-            <?php endforeach; ?>
-
-        </select><br /> <br />
-        comment: <textarea name="comment"><?php echo isset($_POST['comment']) ? $_POST['comment'] : ""; ?></textarea>
-        <br /> <br />
-        manager: <input name="manager" type="text" <?php HTML::post_value('manager'); ?> /> <br /> <br />
-        <input id="other_emails_hidden_field" type="hidden" value="" name="other_emails" />
-        <input type="submit" value="Save" />
+   
+        <input type="submit" value="Save"/>
+       
     </form>
 
 </div>
@@ -59,7 +93,7 @@
             add_new_email();
         });
     });
-    
+
     var other_emails_json_string = '<?php echo isset($_POST['other_emails']) ? $_POST['other_emails'] : ""; ?>';
 
     var other_emails = other_emails_json_string ? JSON.parse(other_emails_json_string) : {};
@@ -72,14 +106,14 @@
         other_emails[index] = object.value;
     }
 
-    function add_new_email(value,key) {
+    function add_new_email(value, key) {
         var index = random_string();
         var child = "";
 
-        if(key){
+        if (key) {
             delete other_emails[key];
             other_emails[index] = value ? value : "";
-        }        
+        }
 
         child += '<div id="other_email_' + index + '">';
         child += '<input onkeyup="other_email_type(\'' + index + '\',this);" value="' + (value ? value : '') + '" />';
@@ -109,10 +143,10 @@
 
         return text;
     }
-    
-    for(var email_key in other_emails){
+
+    for (var email_key in other_emails) {
         var email_address = other_emails[email_key];
-        add_new_email(email_address,email_key);
+        add_new_email(email_address, email_key);
     }
 
 </script>

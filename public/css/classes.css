@@ -358,7 +358,7 @@
 }
 
 
-/* Grousp-details */
+/* Groups-details */
 
 .details1 { 
     padding-left: 120px;
@@ -398,6 +398,25 @@
 }
 
 .input-text { font-family: Ebrima;}
+
+/* Groups-Add */
+
+
+.addemail { 
+    background-image: url('../images/addemail.png');
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    height: 40px;
+    width: 40px;
+    text-decoration: none;
+    float: right;
+    margin-top: 3px;
+        
+    
+}
+
+
 
 
 
