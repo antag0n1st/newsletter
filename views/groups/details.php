@@ -52,7 +52,7 @@
             comment:
             </div>
             <div class="collum2">
-            <textarea name="comment" id="comment" style="width: 400px;height: 200px;"></textarea>
+            <textarea name="comment" id="comment" style="width: 360px;height: 200px;"></textarea>
         </div>
         <div class="history text">
             history of visited festivals

@@ -13,10 +13,10 @@
         </div>
 
         <div class="collum2">
-            <input name="group_name" type="text" <?php HTML::post_value('group_name'); ?> /> 
-            <input name="contact_name" type="text" <?php HTML::post_value('contact_name'); ?> /> 
-            <input name="manager" type="text" <?php HTML::post_value('manager'); ?> /> 
-            <select name="category_id">
+            <input class="input-text" name="group_name" type="text" <?php HTML::post_value('group_name'); ?> /> 
+            <input class="input-text" name="contact_name" type="text" <?php HTML::post_value('contact_name'); ?> /> 
+            <input class="input-text" name="manager" type="text" <?php HTML::post_value('manager'); ?> /> 
+            <select class="input-text" name="category_id">
 
                 <?php foreach ($categories as $key => $category): /* @var $category Category */ ?>
 
@@ -36,9 +36,9 @@
             country:  
         </div>
         <div class="collum2">
-            <input name="address" type="text" <?php HTML::post_value('address'); ?> /> 
-            <input name="city" type="text" <?php HTML::post_value('city'); ?> /> 
-            <select name="country_id">
+            <input class="input-text" name="address" type="text" <?php HTML::post_value('address'); ?> /> 
+            <input class="input-text" name="city" type="text" <?php HTML::post_value('city'); ?> /> <br/>
+            <select class="input-text" name="country_id">
 
                 <?php foreach ($countries as $key => $country): /* @var $country Country */ ?>
 
@@ -58,31 +58,31 @@
             email:
         </div>
         <div class="collum2">
-            <input name="phone" type="text" <?php HTML::post_value('phone'); ?> /> 
-            <input name="website" type="text" <?php HTML::post_value('website'); ?> /> 
+            <input class="input-text" name="phone" type="text" <?php HTML::post_value('phone'); ?> /> 
+            <input class="input-text" name="website" type="text" <?php HTML::post_value('website'); ?> /> 
             <div>
-            <div id="other_emails"></div>
-            <div> <input class="addemail" id="add_email" type="button" /> </div>
-        </div>
-        <input name="email" type="text" <?php HTML::post_value('email'); ?> /> 
-        
-             <input id="other_emails_hidden_field" type="hidden" value="" name="other_emails" />
-        <!-- RENDER OTHER EMAIL -->
-            
+                <div id="other_emails"></div>
+                <div> <input class="addemail" id="add_email" type="button" title="Add New" /> </div>
             </div>
-        
-        <div class="details2">
-             <div class="collum1 text">
-                 comment: 
-                 </div>
-            <div class="collum2">
-                <textarea name="comment"> <?php echo isset($_POST['comment']) ? $_POST['comment'] : ""; ?> </textarea>
-                </div>
-       </div>
+            <input class="input-text" name="email" type="text" <?php HTML::post_value('email'); ?> /> 
 
-   
-        <input type="submit" value="Save"/>
-       
+            <input  class="input-text" id="other_emails_hidden_field" type="hidden" value="" name="other_emails" />
+            <!-- RENDER OTHER EMAIL -->
+
+        </div>
+
+        <div class="details2">
+            <div class="collum1 text">
+                comment: 
+            </div>
+            <div class="collum2">
+                <textarea name="comment" style="width: 360px; height: 200px;"> <?php echo isset($_POST['comment']) ? $_POST['comment'] : ""; ?> </textarea>
+            </div>
+        </div>
+
+
+        <input class="groups-save" type="submit" value="Save"/>
+
     </form>
 
 </div>
@@ -116,8 +116,8 @@
         }
 
         child += '<div id="other_email_' + index + '">';
-        child += '<input onkeyup="other_email_type(\'' + index + '\',this);" value="' + (value ? value : '') + '" />';
-        child += '<input type="button" value="remove" onclick="remove_by_index(\'' + index + '\');" />';
+        child += '<input class="input-text" onkeyup="other_email_type(\'' + index + '\',this);" value="' + (value ? value : '') + '" />';
+        child += '<input class="x" type="button" value="x" onclick="remove_by_index(\'' + index + '\');" />';
         child += "";
         child += "</div>";
 

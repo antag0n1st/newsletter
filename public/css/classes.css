@@ -235,7 +235,7 @@
     color: black;
     text-decoration: none;
     float: left;
-    
+
 
 
 }
@@ -246,7 +246,7 @@
                padding-left: 60px;
                text-decoration: none;;
                float: left;
-               
+
 
 }
 
@@ -366,19 +366,19 @@
 }
 
 .collum1 { width: 100px;
-          display: block;
-          float: left;
-          line-height: 30px;
-          text-align: right;
-          padding-right: 10px;
-                    
-        }
-.collum2 { width: 250px;
-          display: block;
-          float: left;
-          line-height: 30px;
-          font-family: Ebrima;
-          }
+           display: block;
+           float: left;
+           line-height: 30px;
+           text-align: right;
+           padding-right: 10px;
+
+}
+.collum2 { width: 217px;
+           display: block;
+           float: left;
+           line-height: 30px;
+           font-family: Ebrima;
+}
 
 .text { font-family: Ebrima;
         color: black;
@@ -394,10 +394,14 @@
 .history {
     float: left;
     padding-left: 195px;
-      
+
 }
 
-.input-text { font-family: Ebrima;}
+.input-text { 
+    font-family: Ebrima;
+    width: 180px;
+
+}
 
 /* Groups-Add */
 
@@ -407,13 +411,40 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border: none;
-    height: 40px;
-    width: 40px;
+    height: 20px;
+    width: 20px;
     text-decoration: none;
     float: right;
-    margin-top: 3px;
-        
-    
+    margin-top: 7px;
+
+}
+
+.addemail:focus { outline: 0px;}
+
+.addemail:hover {background-image: url('../images/addemail-hover.png');}
+
+.x { 
+    margin-left: 13px;
+    background-color: lightgray;
+    border: none;
+    color: #363636;
+}
+
+.groups-save { 
+    background-color: #3e86fc;
+    border: solid 1px;
+    border-color: #3e86fc;
+    color: white;
+    margin-left: 109px;
+    margin-top: 10px;
+    width: 80px;
+    height: 26px;
+    font-size: 16px;
+}
+
+.groups-save:hover {
+    border: solid 1px;
+    border-color: #004499;
 }
 
 
