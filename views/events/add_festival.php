@@ -1,8 +1,15 @@
-<form id="add-event" name="form" method="post" action="<?php echo URL::abs('events/add-festival'); ?>">
-    <br />
-    Title: <input type="text" name="festival_name" <?php HTML::post_value('festival_name'); ?> /> <br /><br />
+<form class="details1" id="add-event" name="form" method="post" action="<?php echo URL::abs('events/add-festival'); ?>">
     
-    country: <select name="country_id">
+    <div class="collum1 text">
+        
+    Title:
+    <br/>
+    Country:
+    </div>
+    
+    <div class="collum2">    
+    <input class="input-text" type="text" name="festival_name" <?php HTML::post_value('festival_name'); ?> />
+    <select class="input-text" name="country_id">
 
             <?php foreach ($countries as $key => $country): /* @var $country Country */ ?>
 
@@ -13,7 +20,7 @@
             <?php endforeach; ?>
 
         </select>
-    <br /><br />
-    <input type="submit" value="save" />
+    
+    <input class="save" type="submit" value="save" />
 
 </form>

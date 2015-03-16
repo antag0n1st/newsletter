@@ -81,7 +81,7 @@
         </div>
 
 
-        <input class="groups-save" type="submit" value="Save"/>
+        <input class="save" type="submit" value="Save"/>
 
     </form>
 
