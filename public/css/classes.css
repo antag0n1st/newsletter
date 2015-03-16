@@ -437,14 +437,17 @@
     color: white;
     margin-left: 105px;
     margin-top: 10px;
-    width: 80px;
-    height: 26px;
-    font-size: 16px;
+    width: 60px;
+    height: 20px;
+    font-size: 14px;
 }
 
 .save:hover {
     border: solid 1px;
     border-color: #004499;
+}
+
+.s {margin-left: 50px;
 }
 
 

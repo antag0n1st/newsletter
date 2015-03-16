@@ -1,11 +1,20 @@
-<form id="add-hotel" name="form" method="post" action="<?php echo URL::abs('hotels/add'); ?>">
+<form class="details1" id="add-hotel" name="form" method="post" action="<?php echo URL::abs('hotels/add'); ?>">
+    <div class="collum1 text">
+    name:
+    <br/>
+    address:
+    <br/>
+    website:
+    <br/>
+    phone:
+    </div>
+    <div class="collum2">
+    <input class="input-text" name="name" type="text" />
+    <input class="input-text" name="address" type="text" />
+    <input class="input-text" name="website" type="text" />
+    <input class="input-text" name="phone" type="text" /> 
 
-    name: <input name="name" type="text" /> <br /><br />
-    address: <input name="address" type="text" /> <br /><br />
-    website: <input name="website" type="text" /> <br /><br />
-    phone: <input name="phone" type="text" /> <br /><br />
-
-    <select name="country_id">
+    <select class="input-text" name="country_id">
 
 
         <?php foreach ($countries as $key => $country): /* @var $country Country */ ?>
@@ -17,8 +26,10 @@
 
         <?php endforeach; ?>
     </select>
+    <br/><br/>
 
 
-    <input type="submit" />
+    <input class="save" type="submit" value="Save"/>
+    </div>
 
 </form>
