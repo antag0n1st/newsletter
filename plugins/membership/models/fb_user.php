@@ -71,7 +71,7 @@ class FbUser {
     
     private function dbToObject($result){
         
-            $row = mysql_fetch_array($result);
+            $row = Model::db()->fetch_assoc($result);
             
             $this->id                   = $row['id'];
             $this->fb_id                = $row['fb_id'];

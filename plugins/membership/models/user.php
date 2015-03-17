@@ -85,7 +85,7 @@ class User {
          if(Model::db()->affected_rows_count() == 1){
             // vekje postoi vakov
              
-             $this->dbToObject(mysql_fetch_array($result));            
+             $this->dbToObject(Model::db()->fetch_assoc($result));            
         }
         
     }
@@ -100,7 +100,7 @@ class User {
        
          if(Model::db()->affected_rows_count() == 1){
             // vekje postoi vakov
-             $this->dbToObject(mysql_fetch_array($result));            
+             $this->dbToObject(Model::db()->fetch_assoc($result));            
         }
         
     }
@@ -116,7 +116,7 @@ class User {
        
          if(Model::db()->affected_rows_count() == 1){
             // vekje postoi vakov
-             $this->dbToObject(mysql_fetch_array($result));  
+             $this->dbToObject(Model::db()->fetch_assoc($result));  
              return true;
         }
         
@@ -135,7 +135,7 @@ class User {
        
          if(Model::db()->affected_rows_count() == 1){
             // vekje postoi vakov
-             $this->dbToObject(mysql_fetch_array($result));
+             $this->dbToObject(Model::db()->fetch_assoc($result));
              
              $query  = " UPDATE users SET ";
              $query .= " login_count = ( login_count + 1 ) , ";
@@ -197,7 +197,7 @@ class User {
     
     public function dbToObject($row){
         
-         //   $row = mysql_fetch_array($result);
+         //   $row = Model::db()->fetch_assoc($result);
             
             $this->id                   = $row['user_id'];
             $this->username             = $row['username'];
