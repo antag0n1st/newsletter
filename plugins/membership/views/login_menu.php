@@ -1,5 +1,5 @@
 <div style="overflow: hidden;">
-<?php if (!Membership::instance()->user->id): /* @var $user User */ /* @var $membership Membership */ ?>   
+<?php if (!Membership::instance()->user->user_id): /* @var $user User */ /* @var $membership Membership */ ?>   
 
     <div style="padding-top: 50px; float: right;">
         
@@ -34,7 +34,7 @@
                                   
 <?php endif; ?>
     </div>
-<?php if(!Membership::instance()->user->id): ?>    
+<?php if(!Membership::instance()->user->user_id): ?>    
     <div id="anonymous-login-panel" class="great-white">
 
             <div class="anonymous-login-panel" >

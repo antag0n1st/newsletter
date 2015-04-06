@@ -151,7 +151,7 @@ class ApplicationsController extends Controller {
             $app->invoice_is_paid = $this->value_for_checkbox('invoice_is_paid');
 
             $app->group_manager = $this->get_post('group_manager');
-            $app->user_id = Membership::instance()->user->id;
+            $app->user_id = Membership::instance()->user->user_id;
             $app->created_at = TimeHelper::DateTimeAdjusted();
 
             $app->save();

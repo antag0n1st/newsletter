@@ -107,7 +107,7 @@ class AdminPostsController extends Controller{
          
          $post->title = str_replace(array("\r\n","\r","\n") , '', $_POST['title']);
          $post->description = str_replace(array("\r\n","\r","\n") , '', $_POST['description']);
-         $post->author = Membership::instance()->user->id;
+         $post->author = Membership::instance()->user->user_id;
          $post->author_name = Membership::instance()->user->full_name;
          $post->blog_categories_id = $_POST['category'];
          $post->date_created = TimeHelper::DateTimeAdjusted();
@@ -148,7 +148,7 @@ class AdminPostsController extends Controller{
          $post->id = $_POST['auto_save_id'];
          $post->title = str_replace(array("\r\n","\r","\n") , '', $_POST['title']);
          $post->description = str_replace(array("\r\n","\r","\n") , '', $_POST['description']);
-         $post->author = Membership::instance()->user->id;
+         $post->author = Membership::instance()->user->user_id;
          $post->author_name = Membership::instance()->user->full_name;
          $post->blog_categories_id = $_POST['category'];
          $post->date_created = date("Y-m-d");

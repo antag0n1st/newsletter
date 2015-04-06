@@ -72,7 +72,7 @@ class BlogController extends Controller{
         
        // if($this->category->id == 4){
             $user = new User();
-            $user->id = $post->author;
+            $user->user_id = $post->author;
             $user->LoadUserFromId();
             Load::assign('author', $user);
       //  }

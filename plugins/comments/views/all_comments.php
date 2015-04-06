@@ -93,7 +93,7 @@
 <?php endforeach; ?>
     
 </div>
-<?php if(Membership::instance()->user->id): ?>
+<?php if(Membership::instance()->user->user_id): ?>
 <div class="comment-textarea" >    
     <textarea rows="0" cols="0" id="comments-textarea-<?php echo $item_id_; ?>" >коментирај...</textarea>    
 </div>   

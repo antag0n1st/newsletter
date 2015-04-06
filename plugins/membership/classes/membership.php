@@ -57,7 +57,7 @@ class Membership {
     public function masterLoginCheck() {
 
         $this->user = $this->getUserFromSession();
-        if ($this->user->id) {
+        if ($this->user->user_id) {
             // ako ima id
         } else if (isset($_GET['login']) and $_GET['login'] == 'facebook') {
             $this->initFacebook();
@@ -67,8 +67,9 @@ class Membership {
         // try to get from cookie
 
         $this->user = $this->get_user_from_cookie();
-
-
+        
+        $u = User::find_user(null, null, $this->user->cookie);
+        $this->user = $u ? $u : new User();
         return $this->user;
     }
 
@@ -113,32 +114,6 @@ class Membership {
 
     public function storeUserToSession($user) {
         $_SESSION['logged_user'] = json_encode($user);
-    }
-
-    public function getUserByUsername($username) {
-        $user = new User();
-        $user->username = $username;
-
-        $user->LoadUserByUsername();
-
-        if (isset($user->id) and
-                is_numeric($user->id) and
-                $user->id > 0
-        ) {
-            return $user;
-        }
-        return null;
-    }
-
-    public function checkUsernameAvailability($username) {
-        $db = new Database();
-        $query = " SELECT * from users ";
-        $query .= " WHERE ";
-        $query .= " username = '" . $db->prep($username) . "' ";
-
-        $result = $db->query($query);
-
-        return $db->affected_rows_count();
     }
 
     public function initFacebook() {
@@ -302,7 +277,7 @@ class Membership {
         if ($fuser->checkUserExists()) {
 
             $user = new User();
-            $user->id = $fuser->user_id;
+            $user->user_id = $fuser->user_id;
             $user->login_type = User::$FACEBOOK;
             $user->LoadUserFromId();
             $user->update();
@@ -330,7 +305,7 @@ class Membership {
             $user->login_type = User::$FACEBOOK;
             $user->save();
             $this->storeUserToSession($user);
-            $fuser->user_id = $user->id;
+            $fuser->user_id = $user->user_id;
             $fuser->saveFbUser();
 
             if (isset($_SERVER['HTTP_REFERER'])) {
@@ -344,7 +319,7 @@ class Membership {
     }
 
     public function pleseLoginMessage($msg = '') {
-        if ($this->user->id) { // you dont need login message if the user is logged.
+        if ($this->user->user_id) { // you dont need login message if the user is logged.
             return;
         }
 

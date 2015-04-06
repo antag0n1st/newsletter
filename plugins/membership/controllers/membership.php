@@ -42,20 +42,17 @@ class MembershipController extends Controller {
         } else if ($lt == 'standard') {
 
             if (isset($_POST) and $_POST) {
-
-                $user = new User();
-                $user->id = -1;
-                $user->login_type = User::$STANDARD;
-                $user->user_level = 1;
-                $user->username = $_POST['username'];
-                $user->password = $_POST['password'];
+               /* @var $user User */
+                $user = User::find_user($this->get_post('username'), $this->get_post('password'));
                 
-                if($user->load_user_from_database()){
-                     Membership::instance()->storeUserToSession($user);                     
-                     Membership::instance()->store_user_to_cookie($user);                     
-                } else {
+                if($user){
+                    $user->login_type = User::$STANDARD;
+                    $user->cookie = String::GUID();
+                    $user->save();
                     
-                }
+                     Membership::instance()->storeUserToSession($user);                     
+                     Membership::instance()->store_user_to_cookie($user);  
+                }                        
                 
                 if (isset($_SESSION['previous_page'])) {
                     header("Location: " . $_SESSION['previous_page']);
@@ -71,7 +68,7 @@ class MembershipController extends Controller {
         if (isset($_POST) and $_POST) {
 
             $user = new User();
-            $user->id = -1;
+            $user->user_id = -1;
             $user->login_type = User::$ANONYMOUS;
             $user->user_level = 1;
             $user->email = $_POST['email'];
