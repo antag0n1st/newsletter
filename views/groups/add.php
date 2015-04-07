@@ -16,7 +16,7 @@
             <input class="input-text" name="group_name" type="text" <?php HTML::post_value('group_name'); ?> /> 
             <input class="input-text" name="contact_name" type="text" <?php HTML::post_value('contact_name'); ?> /> 
             <input class="input-text" name="manager" type="text" <?php HTML::post_value('manager'); ?> /> 
-            <select class="input-text" name="category_id">
+            <select class="input-text" name="category_id" style="cursor: pointer;">
 
                 <?php foreach ($categories as $key => $category): /* @var $category Category */ ?>
 
@@ -38,7 +38,7 @@
         <div class="collum2">
             <input class="input-text" name="address" type="text" <?php HTML::post_value('address'); ?> /> 
             <input class="input-text" name="city" type="text" <?php HTML::post_value('city'); ?> /> <br/>
-            <select class="input-text" name="country_id">
+            <select class="input-text" name="country_id"style="cursor: pointer;">
 
                 <?php foreach ($countries as $key => $country): /* @var $country Country */ ?>
 

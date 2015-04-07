@@ -14,7 +14,7 @@
     <input class="input-text" name="website" type="text" />
     <input class="input-text" name="phone" type="text" /> 
 
-    <select class="input-text" name="country_id">
+    <select class="input-text" name="country_id" style="cursor: pointer;">
 
 
         <?php foreach ($countries as $key => $country): /* @var $country Country */ ?>

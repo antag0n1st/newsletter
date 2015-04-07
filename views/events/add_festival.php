@@ -9,7 +9,7 @@
     
     <div class="collum2">    
     <input class="input-text" type="text" name="festival_name" <?php HTML::post_value('festival_name'); ?> />
-    <select class="input-text" name="country_id">
+    <select class="input-text" name="country_id" style="cursor: pointer;">
 
             <?php foreach ($countries as $key => $country): /* @var $country Country */ ?>
 

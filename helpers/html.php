@@ -14,7 +14,7 @@ class HTML {
         }
     }
 
-    public static function checkbox($name, $class = "", $value = "yes", $style = "", $attr = array(), $return = false,$is_checked = false) {
+    public static function checkbox($name, $class = "", $value = "yes", $style = "cursor: pointer;", $attr = array(), $return = false,$is_checked = false) {
 
         $checkbox = "<input type=\"checkbox\" name=\"" . $name . "\" id=\"" . $name . "\" ";
         $checkbox .= " value=\"" . $value . "\" class=\"" . $class . "\" style=\"" . $style . "\" ";
@@ -66,7 +66,7 @@ class HTML {
         }
     }
 
-    public static function textarea($name = "", $class = "", $style = "", $attr = array(), $return = false,$initial_text = null) {
+    public static function textarea($name = "", $class = "", $style = "width: 360px; height: 200px;", $attr = array(), $return = false,$initial_text = null) {
         $textarea = "<textarea";
         $textarea .= " name=\"" . $name . "\" id=\"" . $name . "\"";
         $textarea .= " class=\"" . $class . "\" style=\"" . $style . "\"";

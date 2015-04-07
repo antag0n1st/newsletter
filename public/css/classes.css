@@ -361,11 +361,11 @@
 /* Groups-details */
 
 .details1 { 
-    padding-left: 120px;
+    padding-left: 50px;
     padding-top: 30px;
 }
 
-.collum1 { width: 100px;
+.collum1 { width: 154px;
            display: block;
            float: left;
            line-height: 30px;
@@ -421,13 +421,16 @@
 
 .addemail:focus { outline: 0px;}
 
-.addemail:hover {background-image: url('../images/addemail-hover.png');}
+.addemail:hover {background-image: url('../images/addemail-hover.png');
+                    cursor: pointer;
+}
 
 .x { 
     margin-left: 13px;
     background-color: lightgray;
     border: none;
     color: #363636;
+    cursor: pointer;
 }
 
 .save { 
@@ -445,6 +448,7 @@
 .save:hover {
     border: solid 1px;
     border-color: #004499;
+   cursor: pointer
 }
 
 .s {margin-left: 50px;
