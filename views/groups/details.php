@@ -1,7 +1,7 @@
 
 <div class="details1">
 
-   
+
     <div class="collum1 text"> 
         name:
         <br/>
@@ -12,13 +12,13 @@
         category:
     </div>
     <div class="collum2">
-    <input class="input-text" id="group_name" type="text" name="name" />
-    <input class="input-text" id="contact_name" type="text" name="contact_name" />
-    <input class="input-text" id="manager" type="text" name="manager" />
-    <input class="input-text" id="category" type="text" name="category" />
-    
+        <input class="input-text" id="group_name" type="text" name="name" />
+        <input class="input-text" id="contact_name" type="text" name="contact_name" />
+        <input class="input-text" id="manager" type="text" name="manager" />
+        <input class="input-text" id="category" type="text" name="category" />
+
     </div>
-    
+
     <div class="collum1 text"> 
         address:
         <br/>
@@ -26,14 +26,14 @@
         <br/>
         country:        
     </div>
-    
+
     <div class="collum2">
-    <input class="input-text" id="country" type="text" name="country" />
-    <input class="input-text" id="city" type="text" name="city" />
-    <input class="input-text" id="address" type="text" name="address" />
+        <input class="input-text" id="country" type="text" name="country" />
+        <input class="input-text" id="city" type="text" name="city" />
+        <input class="input-text" id="address" type="text" name="address" />
     </div>
 
-     <div class="collum1 text"> 
+    <div class="collum1 text"> 
         website:
         <br/>
         email:
@@ -42,20 +42,23 @@
     </div>
 
     <div class="collum2">
-     <input class="input-text" id="website" type="text" name="website" />
-     <input class="input-text" id="email" type="text" name="email" />
-     </div>
-  
+        <input class="input-text" id="website" type="text" name="website" />
+        <input class="input-text" id="email" type="text" name="email" />
+    </div>
+
     <div class="details2">
         <div class="collum1 text">
-            
+
             comment:
-            </div>
-            <div class="collum2">
+        </div>
+        <div class="collum2">
             <textarea name="comment" id="comment" style="width: 360px;height: 200px;"></textarea>
         </div>
         <div class="history text">
             history of visited festivals
+        </div>
+        <div id="history_of_events">
+
         </div>
     </div>
 
@@ -98,7 +101,7 @@
     };
 
     var set_data = function (data) {
-        console.log(data);
+
         if (data.length) {
             var group = data[0];
 
@@ -116,6 +119,33 @@
             $("#manager").val(group.manager);
             $("#comment").val(group.comment);
 
+            $("#history_of_events").html('');
+
+            if (group.festivals) {
+                $.each(group.festivals, function (key, festival) {
+
+                    var festival_html = "<div>";
+                    festival_html += '<a target="_blank" ';
+                    festival_html += 'href="'+base_url+'applications/details/'+festival.application_id+'">';
+                    festival_html += festival.festival_name;
+                    festival_html += '</a>';
+                    festival_html += '';
+                    festival_html += '';
+                    festival_html += '';
+                    festival_html += '';
+                    festival_html += '';
+                    festival_html += "</div>";
+                    $("#history_of_events").append(festival_html);
+                    //       event_ended_at: "2015-03-25 00:00:00"
+//       event_id: "18"
+//       event_started_at: "2015-03-18 00:00:00"
+//       festival_id: "2"
+//       festival_name: "Festival na site ludosti"
+//       hotel_id: "3"
+//       hotel_name: "akjshd glashdg aksjdh gaksjdhg lasdhlg laskhdg lasdhg "
+                });
+            }
+
         } else {
             $("#group_name").val('');
             $("#contact_name").val('');
@@ -130,6 +160,7 @@
 
             $("#manager").val('');
             $("#comment").val('');
+            $("#history_of_events").html('');
         }
 
     };

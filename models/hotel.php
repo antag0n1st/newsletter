@@ -35,7 +35,7 @@ class Hotel extends Model {
 
         $query = " SELECT h.* ,c.country_name FROM hotels as h ";
         $query .= " JOIN countries as c ON h.country_id = c.id ";
-        $query .= " WHERE h.hotel_name like '%" . Model::db()->prep($term) . "%' ";
+        $query .= " WHERE LOWER(h.hotel_name) like LOWER('%" . Model::db()->prep($term) . "%') ";
 
         $result = Model::db()->query($query);
 

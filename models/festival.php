@@ -24,7 +24,7 @@ class Festival extends Model {
         
         $query = " SELECT f.* ,c.country_name FROM festivals as f ";
         $query .= " JOIN countries as c ON f.country_id = c.id ";
-        $query .= " WHERE f.festival_name like '%".Model::db()->prep($term)."%' ";
+        $query .= " WHERE LOWER(f.festival_name) like LOWER('%".Model::db()->prep($term)."%') ";
         
         $result = Model::db()->query($query);
         

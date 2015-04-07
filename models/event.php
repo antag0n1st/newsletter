@@ -42,7 +42,7 @@ class Event extends Model {
         $query = " SELECT e.* ,c.country_name , f.festival_name FROM events as e ";
         $query .= " JOIN festivals as f ON e.festival_id = f.id ";
         $query .= " JOIN countries as c ON f.country_id = c.id ";
-        $query .= " WHERE f.festival_name like '%" . Model::db()->prep($term) . "%' ";
+        $query .= " WHERE LOWER(f.festival_name) like LOWER('%" . Model::db()->prep($term) . "%') ";
 
         $result = Model::db()->query($query);
 
