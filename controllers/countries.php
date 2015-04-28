@@ -2,11 +2,18 @@
 
 class CountriesController extends Controller {
 
+    public function __construct() {
+        parent::__construct();
+        if (!Membership::instance()->user->user_level) {
+            URL::redirect('');
+        }
+    }
+
     public function main() {
         global $view;
         global $_active_page_;
         global $_active_page_submenu_;
-        
+
         $view = "list";
         $_active_page_ = "countries";
         $_active_page_submenu_ = "list";
@@ -19,10 +26,10 @@ class CountriesController extends Controller {
     }
 
     public function add() {
-        global $view;        
+        global $view;
         global $_active_page_;
         global $_active_page_submenu_;
-        
+
         $view = "add";
         $_active_page_ = "countries";
         $_active_page_submenu_ = "add";
@@ -42,14 +49,14 @@ class CountriesController extends Controller {
 
     public function delete($id) {
 
-            Load::model('country');
+        Load::model('country');
 
-            $country = new Country();
-            $country->id = $id;
-            
-            $country->delete();
-            
-            URL::redirect('countries');
+        $country = new Country();
+        $country->id = $id;
+
+        $country->delete();
+
+        URL::redirect('countries');
     }
 
 }

@@ -26,9 +26,10 @@ class Application extends Model {
         'invitation_is_sent',
         'invitation_price',
         'invoice_price',
-        'invoice_is_paid',
+        'invoice_paid_sum',
         'group_manager',
-        'created_at'
+        'created_at',
+        'is_canceled'
     );
     
     public $id;
@@ -55,31 +56,47 @@ class Application extends Model {
     public $invoice_is_paid;
     public $group_manager;
     public $created_at;
+    public $is_canceled;
+    public $invoice_paid_sum;
+    
+    public $group_name;
+    public $festival_name;
+    public $hotel_name;
+    public $invoices;
     
     public static function get_application_by_id($id){
         
         $query = " SELECT a.id as application_id , a.* , g.* , c.*,cg.*,h.*,e.*,f.*,u.* ";
+        $query .= "  ";
         $query .= " FROM applications as a ";
         $query .= " JOIN groups as g ON a.group_id = g.id ";
-        $query .= " JOIN countries as c ON g.country_id = c.id ";
-        $query .= " JOIN categories as cg ON g.category_id = cg.id ";
-        $query .= " JOIN hotels as h ON a.hotel_id = h.id ";
+        $query .= " LEFT JOIN countries as c ON g.country_id = c.id ";
+        $query .= " LEFT JOIN categories as cg ON g.category_id = cg.id ";
+        $query .= " LEFT JOIN hotels as h ON a.hotel_id = h.id ";
         $query .= " JOIN events as e ON a.event_id = e.id ";
         $query .= " JOIN festivals as f ON e.festival_id = f.id ";
         $query .= " JOIN users as u ON a.user_id = u.user_id ";
         
-        $query .= " WHERE a.id = '".Model::db()->prep($id)."' ";
-        
+        $query .= " WHERE a.id = '".Model::db()->prep($id)."'  AND is_canceled = 0 ";
+        $query .= " LIMIT 1 ";
         
         $result = Model::db()->query($query);
 
-        while ($row = Model::db()->fetch_assoc($result)) {     
-           $row['event_started_at'] = date('d M Y', strtotime($row['event_started_at']));
+        while ($row = Model::db()->fetch_object($result)) {     
+           $row->event_started_at = date('d M Y', strtotime($row->event_started_at));
+           $row->invoices = '';
            return $row;
         }
         
         return array();
     }
+    
+    public static $APP_NOT_SENT = 'application-is-not-sent';
+    public static $APP_SENT = 'application-is-sent';
+    public static $APP_ANSWERED = 'application-is-answered';
+    public static $INVITATION_IS_SENT = 'invitation-is-sent';
+    public static $INVOICE_IS_PAID = 'invoice-is-paid';
+    public static $ACTIVE = 'active';
 
     public static function list_of_applications($filter = ''){
         
@@ -90,16 +107,16 @@ class Application extends Model {
         $query .= " JOIN festivals as f ON e.festival_id = f.id ";
         $query .= " JOIN users as u ON a.user_id = u.user_id ";
         
-        if($filter == "application-is-not-sent") {
-            $query .= " WHERE application_is_sent = 0";
-        } else if($filter == "application-is-sent") {
-            $query .= " WHERE application_is_sent = 1 AND application_has_answer = 0";
-        } else if($filter == "application-is-answered") {
-            $query .= " WHERE application_has_answer = 1 AND invitation_is_sent = 0";
-        } else if($filter == "invitation-is-sent") {
-            $query .= " WHERE invitation_is_sent = 1 AND invoice_is_paid = 0";
-        } else if($filter == "invoice-is-paid") {
-            $query .= " WHERE invoice_is_paid = 1";
+        if($filter == Application::$APP_NOT_SENT) {
+            $query .= " WHERE application_is_sent = 0 AND is_canceled = 0";
+        } else if($filter == Application::$APP_SENT) {
+            $query .= " WHERE application_is_sent = 1 AND application_has_answer = 0  AND is_canceled = 0";
+        } else if($filter == Application::$APP_ANSWERED) {
+            $query .= " WHERE application_has_answer = 1 AND invitation_is_sent = 0  AND is_canceled = 0";
+        } else if($filter == Application::$ACTIVE) {
+            $query .= " WHERE event_started_at >= NOW()  AND is_canceled = 0";
+        } else {
+            $query .= " WHERE is_canceled = 0";
         }
 
         $result = Model::db()->query($query);

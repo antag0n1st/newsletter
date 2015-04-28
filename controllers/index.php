@@ -1,8 +1,14 @@
 <?php
     class IndexController extends Controller {
         public function main(){    
-          global $view;
-          $view = 'home_page';
+                      
+            if(Membership::instance()->user->user_level){
+                URL::redirect('applications/active');
+            } else {
+                global $view;
+                $view = null;
+            }
+            
         }
        
     }

@@ -34,6 +34,8 @@
     </div>
 
     <div class="collum1 text"> 
+        phone: 
+        <br/>
         website:
         <br/>
         email:
@@ -42,8 +44,12 @@
     </div>
 
     <div class="collum2">
+        <input class="input-text" id="phone" type="text" name="phone" />
         <input class="input-text" id="website" type="text" name="website" />
         <input class="input-text" id="email" type="text" name="email" />
+        <div id="other_emails">
+            
+        </div>
     </div>
 
     <div class="details2">
@@ -113,8 +119,14 @@
             $("#city").val(group.city);
             $("#address").val(group.address);
 
+            $("#phone").val(group.phone_number);
             $("#website").val(group.website);
             $("#email").val(group.email);
+            
+            $("#other_emails").html('');
+            $.each(JSON.parse(group.other_emails),function(key,email){
+                $("#other_emails").append('<input class="input-text" type="text" name="email" value="'+email+'" />');
+            });
 
             $("#manager").val(group.manager);
             $("#comment").val(group.comment);
@@ -155,8 +167,10 @@
             $("#city").val('');
             $("#address").val('');
 
+            $("#phone").val('');
             $("#website").val('');
             $("#email").val('');
+            $("#other_emails").html('');
 
             $("#manager").val('');
             $("#comment").val('');

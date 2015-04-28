@@ -21,8 +21,8 @@ class TimeHelper
         return date("Y-m-d", strtotime( self::DatetimeInGMT() . " + 2 hours" ) );
     }
     
-    public static function to_date($date_time){
-        return date('Y-m-d', strtotime($date_time));
+    public static function to_date($date_time,$format = null){
+        return date($format ? $format : 'Y-m-d', strtotime($date_time));
     }
     
     static function DateTime(){

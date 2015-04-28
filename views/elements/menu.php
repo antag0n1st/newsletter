@@ -3,16 +3,17 @@
         <div id="menu-wraper">
             <?php global $_active_page_;
             global $_active_page_submenu_; ?>
+            
+            <div> 
+                <a href="<?php echo URL::abs('applications/active'); ?>" 
+                   class="menu-list <?php echo $_active_page_ == 'applications' ? 'active' : ''; ?>"> 
+                    Database 
+                </a> 
+            </div>
             <div> 
                 <a style="margin-left: 60px;" href="<?php echo URL::abs('groups'); ?>" 
                    class="menu-list <?php echo $_active_page_ == 'groups' ? 'active' : ''; ?>"> 
                     Groups 
-                </a> 
-            </div>
-            <div> 
-                <a href="<?php echo URL::abs('applications'); ?>" 
-                   class="menu-list <?php echo $_active_page_ == 'applications' ? 'active' : ''; ?>"> 
-                    Applications 
                 </a> 
             </div>
             <div> 
@@ -45,6 +46,12 @@
                     Newsletter 
                 </a> 
             </div>
+            <div> 
+                <a href="<?php echo URL::abs('finance'); ?>" 
+                   class="menu-list <?php echo $_active_page_ == 'finance' ? 'active' : ''; ?>"> 
+                    Finance 
+                </a> 
+            </div>
         </div>
     </div>
 </div>
@@ -54,14 +61,20 @@
     <div class="submenu"> 
         <div> 
             <a href="<?php echo URL::abs('groups'); ?>" 
-               class="<?php echo $_active_page_submenu_ == 'details' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
-                Details 
+               class="<?php echo $_active_page_submenu_ == 'cards' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Cards 
             </a> 
         </div>
         <div> 
             <a href="<?php echo URL::abs('groups/lista'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'list' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 List 
+            </a> 
+        </div>
+        <div> 
+            <a href="<?php echo URL::abs('groups/details'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'details' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Details 
             </a> 
         </div>
         <div> 
@@ -178,10 +191,18 @@
 
 <?php if ($_active_page_ == 'applications'): ?>
     <div class="submenu"> 
+        
+        <div> 
+            <a href="<?php echo URL::abs('applications/active'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'active' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Active 
+            </a> 
+        </div>
+        
         <div> 
             <a href="<?php echo URL::abs('applications'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'list' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
-                List 
+                All 
             </a> 
         </div>
         
@@ -207,20 +228,6 @@
         </div>
         
         <div> 
-            <a href="<?php echo URL::abs('applications/list-by-filter/invitation-is-sent'); ?>" 
-               class="<?php echo $_active_page_submenu_ == 'invitation-is-sent' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
-                Invitation Sent
-            </a> 
-        </div>
-        
-        <div> 
-            <a href="<?php echo URL::abs('applications/list-by-filter/invoice-is-paid'); ?>" 
-               class="<?php echo $_active_page_submenu_ == 'invoice-is-paid' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
-                Paid
-            </a> 
-        </div>
-        
-        <div> 
             <a href="<?php echo URL::abs('applications/add'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'add' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 Add 
@@ -229,5 +236,16 @@
         
         
         
+    </div>
+<?php endif; ?>
+
+<?php if ($_active_page_ == 'finance'): ?>
+    <div class="submenu"> 
+        <div> 
+            <a href="<?php echo URL::abs('finance'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'subjects' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                Subjects 
+            </a> 
+        </div>
     </div>
 <?php endif; ?>

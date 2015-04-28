@@ -72,6 +72,10 @@ class Database {
     public function fetch_assoc($result) {
         return mysqli_fetch_assoc($result);
     }
+    
+    public function fetch_object($result) {
+        return mysqli_fetch_object($result);
+    }
 
     private function execute() {
         $this->open_connection();

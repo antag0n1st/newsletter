@@ -16,7 +16,9 @@
         <tbody>
             <?php foreach ($hotels as $key => $hotel): /* @var $hotel Hotel */ ?>
             <tr>
-                <td> <?php echo $hotel->id; ?> </td>
+                <td> 
+                    <?php HTML::anchor($hotel->id, 'hotels/hotel/'.$hotel->id); ?> 
+                </td>
                 <td> <?php echo $hotel->hotel_name; ?> </td>
                 <td> <?php echo $hotel->country; ?> </td>
                 <td> <?php echo $hotel->address; ?> </td>

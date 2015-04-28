@@ -2,6 +2,13 @@
 
 class EventsController extends Controller {
 
+    public function __construct() {
+        parent::__construct();
+        if (!Membership::instance()->user->user_level) {
+            URL::redirect('');
+        }
+    }
+
     public function main() {
         global $view;
         global $_active_page_;
@@ -127,7 +134,7 @@ class EventsController extends Controller {
         $festivals = Festival::get_all_festivals();
         Load::assign('festivals', $festivals);
     }
-
+    
     private function convert_date($input_date) {
 
         if (isset($input_date) and $input_date) {

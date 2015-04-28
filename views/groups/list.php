@@ -18,7 +18,7 @@
         <tbody>
             <?php foreach ($groups as $key => $group): /* @var $group Group */ ?>
             <tr>
-                <td> <?php echo $group->id; ?> </td>
+                <td> <a href="<?php echo URL::abs('groups/details/'.$group->id); ?>"> <?php echo $group->id; ?> </a> </td>
                 <td> <?php echo $group->group_name; ?> </td>
                 <td> <?php echo $group->contact_name; ?> </td>
                 <td> <?php echo $group->email; ?> </td>

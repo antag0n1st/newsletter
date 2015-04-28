@@ -112,5 +112,28 @@ class Group extends Model {
 
         return $groups;
     }
+    
+    public static function find_groups_by_event($event_id) {
+
+        $query = " SELECT g.* ,c.country_name ,";
+        $query .= " a.id as application_id , a.participants , a.number_of_rooms , a.invitation_is_sent , a.invoice_paid_sum , ";
+        $query .= " u.username ";
+        $query .= " FROM groups as g ";
+        $query .= " JOIN applications as a ON g.id = a.group_id ";
+        $query .= " JOIN countries as c ON g.country_id = c.id ";
+        $query .= " JOIN users as u ON u.user_id = a.user_id ";
+        $query .= " WHERE a.event_id = '".Model::db()->prep($event_id)."' ";
+        $query .= " AND a.is_canceled = 0 ";
+
+        $result = Model::db()->query($query);
+
+        $groups = array();
+
+        while ($row = Model::db()->fetch_assoc($result)) {
+            $groups[] = $row;
+        }
+
+        return $groups;
+    }
 
 }

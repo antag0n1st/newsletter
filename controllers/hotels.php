@@ -2,6 +2,13 @@
 
 class HotelsController extends Controller {
 
+    public function __construct() {
+        parent::__construct();
+        if (!Membership::instance()->user->user_level) {
+            URL::redirect('');
+        }
+    }
+
     public function main() {
         global $view;
         global $_active_page_;
@@ -28,6 +35,20 @@ class HotelsController extends Controller {
         }
 
         Load::assign('hotels', $hotels);
+    }
+    
+    public function hotel($id = 0){
+        global $view;
+        global $_active_page_;
+        global $_active_page_submenu_;
+
+        $_active_page_ = 'hotels';
+        $_active_page_submenu_ = 'hotel';
+        $view = "hotel";
+        
+        Load::model('hotel');
+        $hotel = Hotel::find_by_id($id);
+        Load::assign('hotel', $hotel);
     }
 
     public function add() {
