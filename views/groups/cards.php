@@ -133,7 +133,7 @@
 
             $("#history_of_events").html('');
 
-            if (group.festivals) {
+             if (group.festivals) {
                 $.each(group.festivals, function (key, festival) {
 
                     var festival_html = "<div>";
