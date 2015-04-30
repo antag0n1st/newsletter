@@ -18,13 +18,21 @@ class Event extends Model {
     public $festival_id;
     public $created_at;
 
-    public static function get_all_events() {
-        
+    public static function get_all_events($paginator = null) {
+        /* @var $paginator Paginator */
         $query = " SELECT e.* , f.festival_name ";
         $query .= " FROM " . Event::$table_name . " as e";
         $query .= " JOIN festivals as f ON e.festival_id = f.id ";
+        
+        if($paginator){
+            Model::db()->query($query);
+            $paginator->total = Model::db()->affected_rows_count();
+        }
+        
         $query .= " ORDER BY id DESC";
-       
+        
+        $query = $paginator->prep_query($query);
+        
         $result = Model::db()->query($query);
         
         $events = array();
@@ -62,14 +70,6 @@ class Event extends Model {
     
     public static function find_all_active(){
         
-        //        - name of the festival
-//	- starting date
-//	- ending date
-//	- number of people coming to the festival
-//	- number of groups coming to the festival
-//	- sum of paid invoices
-//	- total number of rooms
-        
         $query = " SELECT f.festival_name ,  ";
         $query .= " e.id , e.event_started_at , e.event_ended_at , ";
         $query .= " SUM(a.participants) as participants , COUNT(a.id) as number_of_groups, ";
@@ -82,6 +82,7 @@ class Event extends Model {
         $query .= " WHERE e.event_started_at >= NOW() ";
         $query .= " AND IFNULL(a.is_canceled,0) = 0";
         $query .= " GROUP BY e.id ";
+        $query .= " ORDER BY event_started_at ";
 
         $result = Model::db()->query($query);
 
@@ -95,5 +96,54 @@ class Event extends Model {
         return $groups;        
 
     }
+    
+    public static function count_all_grouped_by_festival_name(){
+        
+        /* @var $paginator Paginator */
+        
+        $query = " SELECT f.id  ";
+        $query .= " FROM events as e ";
+        $query .= " JOIN festivals as f ON e.festival_id = f.id ";
+        $query .= " LEFT JOIN applications as a ON e.id = a.event_id ";
+        $query .= " AND IFNULL(a.is_canceled,0) = 0";
+        $query .= " GROUP BY e.id ";
+        
+        Model::db()->query($query);
+
+        return Model::db()->affected_rows_count();
+
+    }
+    
+    public static function find_all_grouped_by_festival_name($paginator=null){
+        
+        /* @var $paginator Paginator */
+        
+        $query = " SELECT f.festival_name ,  ";
+        $query .= " e.id , e.event_started_at , e.event_ended_at , ";
+        $query .= " SUM(a.participants) as participants , COUNT(a.id) as number_of_groups, ";
+        $query .= " SUM(a.number_of_rooms) number_of_rooms ,";
+        $query .= " SUM(a.invoice_paid_sum) as invoice_paid_sum ";
+        $query .= " FROM events as e ";
+        $query .= " JOIN festivals as f ON e.festival_id = f.id ";
+        $query .= " LEFT JOIN applications as a ON e.id = a.event_id ";
+        $query .= " AND IFNULL(a.is_canceled,0) = 0";
+        $query .= " GROUP BY e.id ";
+        $query .= " ORDER BY event_started_at DESC ";
+        
+        $query = $paginator->prep_query($query);
+
+        $result = Model::db()->query($query);
+
+        $groups = array();
+
+        while ($row = Model::db()->fetch_assoc($result)) {
+           //$row['event_started_at'] = date('d M Y', strtotime($row['event_started_at']));
+            $groups[] = $row;
+        }
+
+        return $groups;        
+
+    }
+    
 
 }

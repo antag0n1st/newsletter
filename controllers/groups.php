@@ -40,7 +40,7 @@ class GroupsController extends Controller {
         }
     }
 
-    public function lista() {
+    public function lista($page_id = 1) {
         global $view;
         global $_active_page_;
         global $_active_page_submenu_;
@@ -60,8 +60,10 @@ class GroupsController extends Controller {
         Load::assign('countries', $cs);
 
         Load::model('group');
-        $groups = Group::find_all();
+        $paginator = new Paginator(0, $page_id, 20, 'groups/lista/');
+        $groups = Group::get_all_groups($paginator);
         Load::assign('groups', $groups);
+        Load::assign('paginator', $paginator);
     }
 
     public function add() {

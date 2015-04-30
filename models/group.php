@@ -35,8 +35,18 @@ class Group extends Model {
     public $comment;
     public $created_at;
 
-    public static function get_all_groups() {
-        $query = "SELECT * FROM " . Group::$table_name . " ORDER BY id DESC";
+    public static function get_all_groups($paginator = null) {
+        $query = "SELECT * FROM " . Group::$table_name ;
+        /* @var $paginator Paginator */
+        if($paginator){
+            Model::db()->query($query);
+            $paginator->total = Model::db()->affected_rows_count();
+        }
+        
+        $query .= " ORDER BY id DESC";
+        
+        $query = $paginator->prep_query($query);
+        
         return Group::find_by_sql($query);
     }
 

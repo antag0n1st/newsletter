@@ -10,16 +10,21 @@ if (!isset($application)) {
     <div class="details1">
         <div class="collum1 text">
             group name:<br/>
+            leader name:<br />
+            country name:<br />
             event name:<br/>
             hotel name:<br/>
-            participant:<br/>
+            participants:<br/>
             date of arrival:<br/>
             date of departure:<br/>
+            category:<br />
             needs airport pickup:<br/>
         </div>
         <div class="collum2">
 
             <?php HTML::textfield('group_name', '', '', array(), false, $application->group_name); ?> 
+            <?php HTML::textfield('leader_name', '', '', array(), false, $application->contact_name); ?> 
+            <?php HTML::textfield('country_name', '', '', array(), false, $application->country_name); ?> 
             <?php HTML::input_hidden('group_id', array(), false, $application->group_id); ?>
             <?php HTML::textfield('event_name', '', '', array(), false, $application->festival_name); ?> 
             <?php HTML::input_hidden('event_id', array(), false, $application->event_id); ?>    
@@ -29,7 +34,8 @@ if (!isset($application)) {
             <?php HTML::textfield('participants', '', '', array(), false, $application->participants); ?> 
             <?php HTML::textfield('date_of_arrival', '', '', array(), false, $application->date_of_arrival); ?>  
             <?php HTML::textfield('date_of_departure', '', '', array(), false, $application->date_of_departure); ?> <br/>
-            <?php HTML::checkbox('needs_airport_pickup', '', 'yes', '', array(), false, $application->needs_airport_pickup); ?> 
+            <?php HTML::select($categories, 'category', $application->category_id); ?> <br />
+                <?php HTML::checkbox('needs_airport_pickup', '', 'yes', '', array(), false, $application->needs_airport_pickup); ?> 
         </div>
 
         <div class="collum1 text">
@@ -39,6 +45,8 @@ if (!isset($application)) {
             4 bed room:<br/>
             5 bed room:<br/>
             number of rooms:<br/>
+            board bassis booked: <br />
+            
         </div>
         <div class="collum2">
             <?php HTML::textfield('bed_1', '', '', array(), false, $application->room_1); ?>
@@ -48,7 +56,10 @@ if (!isset($application)) {
             <?php HTML::textfield('bed_5', '', '', array(), false, $application->room_5); ?>
 
             <?php HTML::textfield('number_of_rooms', '', '', array(), false, $application->number_of_rooms); ?> 
-            <label id="rooms_check"></label> 
+            <label style="margin:0 0 0 5px;" id="rooms_check"></label> 
+            <?php HTML::select($board_basis, 'board_basis', $application->board_basis_booked); ?>
+            
+            
         </div>
         <div class="collum1 text">
             application is sent: <br/>
@@ -105,7 +116,11 @@ if (!isset($application)) {
         this.subject_id = 0;
         this.subject_name = '';
         this.is_paid = false;
+        this.invoice_key = '';
     };
+    
+    document.getElementById("leader_name").setAttribute("disabled", "true");
+    document.getElementById("country_name").setAttribute("disabled", "true");
 
     var invoices_json_string = '<?php echo isset($_POST['invoices']) ? $_POST['invoices'] : $application->invoices; ?>';
 
@@ -115,6 +130,14 @@ if (!isset($application)) {
         $("#add_invoice").click(function () {
             add_invoice();
         });
+        
+        $(document).on('click','.invoice-check',this,function(event){
+            
+            if(!event.target.checked && !confirm('are you sure ?')){
+                 event.preventDefault();
+            }
+           
+        });
 
         for (var key in invoices) {
             var invoice = invoices[key];
@@ -123,14 +146,16 @@ if (!isset($application)) {
     });
 
     function add_invoice(invoice, key) {
-        var index = random_string();
+        var index = invoice ? invoice.invoice_key : random_string(36);
         var child = "";
 
         if (key) {
-            delete invoices[key];
-            invoices[index] = invoice ? invoice : new Invoice();
+           // delete invoices[key];
+           // invoices[index] = invoice ? invoice : new Invoice();
+           invoices[key] = invoice;
         } else {
             invoices[index] = new Invoice();
+            invoices[index].invoice_key = index;
         }
         
         child += '<div style="background-color:#eeeeee;padding:5px;margin:5px;overflow:hidden;" id="invoice_' + index + '">';
@@ -138,7 +163,8 @@ if (!isset($application)) {
         child += 'price: <input onkeyup="price_type(\'' + index + '\',this);" type="text" value="' + (invoice ? invoice.price : '') + '" /> <br />';
         child += 'subject: <input id="subject_'+index+'" onkeyup="subject_type(\'' + index + '\',this);" type="text" value="' + (invoice ? invoice.subject_name : '') + '" /> <br />';
         child += '<input id="subject_id_'+index+'" type="hidden" />';
-        child += '<label for="checkbox_'+index+'">is paid:</label> <input id="checkbox_'+index+'" onchange="checkbox_change(\'' + index + '\',this);" type="checkbox" ' + (invoice && invoice.is_paid ? 'checked="checked"' : '') + ' />';
+        child += '<label for="checkbox_'+index+'">is paid:</label> ';
+        child += '<input class="invoice-check" id="checkbox_'+index+'" onchange="checkbox_change(\'' + index + '\',this);" type="checkbox" ' + (invoice && invoice.is_paid == "1" ? 'checked="checked"' : '') + ' />';
         child += '';
 
         child += '</div>';
@@ -155,6 +181,7 @@ if (!isset($application)) {
     }
 
     function price_type(index, object) {
+
         invoices[index].price = object.value;
     }
 
@@ -221,7 +248,7 @@ if (!isset($application)) {
         var n5 = parseInt($("#bed_5").val());
 
         var total = parseInt($("#number_of_rooms").val());
-        var participant = parseInt($("#participant").val());
+        var participants = parseInt($("#participants").val());
 
         n1 = isNaN(n1) ? 0 : n1;
         n2 = isNaN(n2) ? 0 : n2;
@@ -230,22 +257,29 @@ if (!isset($application)) {
         n5 = isNaN(n5) ? 0 : n5;
 
         total = isNaN(total) ? 0 : total;
-        participant = isNaN(participant) ? 0 : participant;
+        participants = isNaN(participants) ? 0 : participants;
+        
+        if(!n1 && !n2 && !n3 && !n4 && !n5 && !total) { return; }
+        
+        var good_image = '<img style="height:18px;" src="'+base_url+'/images/good.png" />';
+        var bad_image = '<img style="height:18px;" src="'+base_url+'/images/bad.png" />';
 
         if (total === n1 + n2 + n3 + n4 + n5) {
-            $("#rooms_check").html("Good");
+            $("#rooms_check").html(good_image);
         } else {
-            $("#rooms_check").html("Bad");
+            $("#rooms_check").html(bad_image);
             return;
         }
 
-        if (participant === n1 * 1 + n2 * 2 + n3 * 3 + n4 * 4 + n5 * 5) {
-            $("#rooms_check").html("Good");
+        if (participants === n1 * 1 + n2 * 2 + n3 * 3 + n4 * 4 + n5 * 5) {
+            $("#rooms_check").html(good_image);
         } else {
-            $("#rooms_check").html("Bad");
+            $("#rooms_check").html(bad_image);
             return;
         }
     }
+
+    is_data_correct();
 
     $(function () {
 
@@ -281,7 +315,7 @@ if (!isset($application)) {
             is_data_correct();
         });
 
-        $("#participant").keyup(function () {
+        $("#participants").keyup(function () {
             is_data_correct();
         });
     });
@@ -315,11 +349,15 @@ if (!isset($application)) {
             focus: function (event, ui) {
                 $("#group_name").val(ui.item.group_name);
                 $("#group_id").val(ui.item.id);
+                $("#leader_name").val(ui.item.contact_name);
+                $("#country_name").val(ui.item.country_name);
                 return false;
             },
             select: function (event, ui) {
                 $("#group_name").val(ui.item.group_name);
                 $("#group_id").val(ui.item.id);
+                $("#leader_name").val(ui.item.contact_name);
+                $("#country_name").val(ui.item.country_name);
                 return false;
             }
         })

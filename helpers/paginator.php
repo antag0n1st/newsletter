@@ -5,6 +5,7 @@
 class Paginator {
 
     public $paging_url = '';
+    public $total = 0;
 
     function __construct($total, $current_page, $per_page = 9, $paging_url = '') {
         $this->total = $total;

@@ -1,6 +1,12 @@
 <?php
 
 class Application extends Model {
+    
+    public static $BOOKING_RO = 'ro';
+    public static $BOOKING_BB = 'bb';
+    public static $BOOKING_HB = 'hb';
+    public static $BOOKING_FB = 'fb';
+    public static $BOOKING_AI = 'ai';
 
     public static $table_name = 'applications';
     public static $id_name = 'id';
@@ -29,7 +35,9 @@ class Application extends Model {
         'invoice_paid_sum',
         'group_manager',
         'created_at',
-        'is_canceled'
+        'is_canceled',
+        'board_basis_booked',
+        'category_id'
     );
     
     public $id;
@@ -58,11 +66,16 @@ class Application extends Model {
     public $created_at;
     public $is_canceled;
     public $invoice_paid_sum;
+    public $category_id;
     
     public $group_name;
     public $festival_name;
     public $hotel_name;
     public $invoices;
+    public $board_basis_booked;
+    public $contact_name;
+    public $country_name;
+    
     
     public static function get_application_by_id($id){
         
@@ -98,7 +111,8 @@ class Application extends Model {
     public static $INVOICE_IS_PAID = 'invoice-is-paid';
     public static $ACTIVE = 'active';
 
-    public static function list_of_applications($filter = ''){
+    public static function list_of_applications($filter = '',$paginator = null){
+         /* @var $paginator Paginator */
         
         $query = " SELECT a.* , g.group_name , f.festival_name , e.event_started_at , u.username ";
         $query .= " FROM applications as a ";
@@ -118,6 +132,18 @@ class Application extends Model {
         } else {
             $query .= " WHERE is_canceled = 0";
         }
+        
+        if($paginator){
+            Model::db()->query($query);
+            $paginator->total = Model::db()->affected_rows_count();
+        }
+        
+        $query .= " ORDER BY a.id DESC ";
+        
+        
+        if($paginator){           
+            $query = $paginator->prep_query($query);
+        }
 
         $result = Model::db()->query($query);
 
@@ -130,5 +156,15 @@ class Application extends Model {
 
         return $applications;
         
+    }
+    
+    public static function get_board_basis(){
+        return array(
+            'nn'=>'none',
+            'ro'=>'Room only',
+            'bb'=>'Bed & Breakfast',
+            'hb'=>'Half Board',
+            'fb'=>'Full Board',
+            'ai'=>'All Inclusive');
     }
 }

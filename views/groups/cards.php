@@ -28,9 +28,9 @@
     </div>
 
     <div class="collum2">
-        <input class="input-text" id="country" type="text" name="country" />
-        <input class="input-text" id="city" type="text" name="city" />
         <input class="input-text" id="address" type="text" name="address" />
+        <input class="input-text" id="city" type="text" name="city" />
+        <input class="input-text" id="country" type="text" name="country" />
     </div>
 
     <div class="collum1 text"> 

@@ -9,7 +9,7 @@ class EventsController extends Controller {
         }
     }
 
-    public function main() {
+    public function main($page_id = 1) {
         global $view;
         global $_active_page_;
         global $_active_page_submenu_;
@@ -19,10 +19,11 @@ class EventsController extends Controller {
         $view = "list_events";
 
         Load::model('event');
-
-        $events = Event::get_all_events();
+        $paginator = new Paginator(0, $page_id, 20, 'events/main/');
+        $events = Event::get_all_events($paginator);
 
         Load::assign('events', $events);
+        Load::assign('paginator', $paginator);
     }
 
     public function add_event() {

@@ -200,6 +200,13 @@
         </div>
         
         <div> 
+            <a href="<?php echo URL::abs('applications/by-festival'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'by-festival' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+                By Festival 
+            </a> 
+        </div>
+        
+        <div> 
             <a href="<?php echo URL::abs('applications'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'list' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 All 

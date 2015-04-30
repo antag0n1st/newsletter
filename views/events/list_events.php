@@ -38,4 +38,12 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    
+    <?php
+    /* @var $paginator Paginator */
+    if (isset($paginator)) {
+        $paginator->build_pagination_html();
+    }
+    ?>
+    
 </div>

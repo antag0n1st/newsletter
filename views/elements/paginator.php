@@ -2,7 +2,7 @@
 
 <div>
     
-    <span class="button round"> <a href="<?php echo URL::abs($paginator->paging_url.$paginator->get_prev_page()); ?>">Претходно</a></span>
+    <span class="button round"> <a href="<?php echo URL::abs($paginator->paging_url.$paginator->get_prev_page()); ?>">Previous</a></span>
 
          <?php  for($i = 1; $i <= $paginator->number_of_pages(); $i++): ?>
               <?php if(($paginator->current_page - 3) < $i and $i < ($paginator->current_page +3)): ?>
@@ -19,7 +19,7 @@
          <?php endfor; ?>
                         
 
-                        <span class="button round"><a href="<?php echo URL::abs($paginator->paging_url.$paginator->get_next_page()); ?>">Следно</a></span>
+                        <span class="button round"><a href="<?php echo URL::abs($paginator->paging_url.$paginator->get_next_page()); ?>">Next</a></span>
 </div>
 
 <?php endif; ?>
