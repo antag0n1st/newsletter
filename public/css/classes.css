@@ -393,8 +393,8 @@
 
 .history {
     float: left;
-    padding-left: 195px;
-
+    padding-left: 150px;
+    padding-right: 5px;
 }
 
 .input-text { 

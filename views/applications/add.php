@@ -34,7 +34,7 @@ if (!isset($application)) {
             <?php HTML::textfield('participants', '', '', array(), false, $application->participants); ?> 
             <?php HTML::textfield('date_of_arrival', '', '', array(), false, $application->date_of_arrival); ?>  
             <?php HTML::textfield('date_of_departure', '', '', array(), false, $application->date_of_departure); ?> <br/>
-            <?php HTML::select($categories, 'category', $application->category_id); ?> <br />
+            <?php HTML::select($categories, 'category_id', $application->category_id); ?> <br />
                 <?php HTML::checkbox('needs_airport_pickup', '', 'yes', '', array(), false, $application->needs_airport_pickup); ?> 
         </div>
 
@@ -70,7 +70,7 @@ if (!isset($application)) {
             group manager: <br/>
         </div>
         <div class="collum2">   
-            <?php HTML::checkbox('application_is_sent', '', 'yes', '', array(), false, $application->application_is_sent); ?> <br/>
+            <?php HTML::checkbox('application_is_sent', 'invoice-check', 'yes', '', array(), false, $application->application_is_sent); ?> <br/>
             <?php HTML::checkbox('applications_has_answer', '', 'yes', '', array(), false, $application->application_has_answer); ?><br/>
             <?php HTML::checkbox('invitation_is_sent', '', 'yes', '', array(), false, $application->invitation_is_sent); ?> <br/>
             <?php HTML::textfield('invitation_price', '', '', array(), false, $application->invitation_price); ?>

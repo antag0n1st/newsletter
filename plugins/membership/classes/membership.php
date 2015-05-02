@@ -109,7 +109,7 @@ class Membership {
     public function store_user_to_cookie($user) {
         $cookie_name = "logged_user";
         $cookie_value = json_encode($user);
-        setcookie($cookie_name, $cookie_value, time() + (60*60*24), "/"); // sec * min * hours
+        setcookie($cookie_name, $cookie_value, time() + (60*60*12), "/"); // sec * min * hours
     }
 
     public function storeUserToSession($user) {

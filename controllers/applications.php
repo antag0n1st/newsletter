@@ -20,7 +20,7 @@ class ApplicationsController extends Controller {
 
         Load::model('application');
         
-        $paginator = new Paginator(100, $page_id, 5, 'applications/main/');
+        $paginator = new Paginator(100, $page_id, 20, 'applications/main/');
 
         $applications = Application::list_of_applications('',$paginator);
         Load::assign('applications', $applications);
@@ -127,6 +127,10 @@ class ApplicationsController extends Controller {
             $application->number_of_rooms = $this->get_post('number_of_rooms');
             $application->board_basis_booked = $this->get_post('board_basis');
 
+            if(!$application->application_is_sent and $this->value_for_checkbox('application_is_sent')){
+                $application->application_date_sent = TimeHelper::DateTimeAdjusted();
+            }
+            
             $application->application_is_sent = $this->value_for_checkbox('application_is_sent');
             $application->application_has_answer = $this->value_for_checkbox('applications_has_answer');
             $application->invitation_is_sent = $this->value_for_checkbox('invitation_is_sent');
@@ -183,8 +187,6 @@ class ApplicationsController extends Controller {
         } else {
             $application->invoices = "";
         }
-
-
 
         Load::assign('application', $application);
 
@@ -284,6 +286,11 @@ class ApplicationsController extends Controller {
 
             $app->remarks = $this->get_post('remarks');
             $app->application_is_sent = $this->value_for_checkbox('application_is_sent');
+            
+            if($app->application_is_sent){
+                $app->application_date_sent = TimeHelper::DateTimeAdjusted();
+            }
+            
             $app->application_has_answer = $this->value_for_checkbox('applications_has_answer');
             $app->invitation_is_sent = $this->value_for_checkbox('invitation_is_sent');
             $app->invitation_price = $this->get_post('invitation_price');

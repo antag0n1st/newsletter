@@ -11,7 +11,8 @@
                 <th> ID </th>
                 <th> Group Name </th>
                 <th> Festival Name </th>
-                <th> Starting </th>
+                <th> Event Starting </th>
+                <th> Application sent </th>
                 <th> Created By </th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                     <td> <?php echo $row['group_name']; ?> </td>
                     <td> <?php echo $row['festival_name']; ?> </td>
                     <td> <?php echo $row['event_started_at']; ?> </td>
+                    <td> <?php echo $row['application_date_sent'] ? TimeHelper::to_date($row['application_date_sent'],'d M Y') : '-'; ?> </td>
                     <td> <?php echo $row['username']; ?> </td>
                 </tr>   
             <?php endforeach; ?>

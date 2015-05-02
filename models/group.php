@@ -12,6 +12,7 @@ class Group extends Model {
         'email',
         'other_emails',
         'phone_number',
+        'other_phone_numbers',
         'country_id',
         'city',
         'address',
@@ -27,6 +28,7 @@ class Group extends Model {
     public $email;
     public $other_emails;
     public $phone_number;
+    public $other_phone_numbers;
     public $country_id;
     public $city;
     public $address;
@@ -56,9 +58,9 @@ class Group extends Model {
             return [];
         }
 
-        $query = " SELECT g.* , c.category_name , cc.country_name , ";
+        $query = " SELECT g.* , c.category_name , cc.country_name , ccc.country_name as country , ";
         $query .= " e.id as event_id , e.event_started_at , e.event_ended_at ,";
-        $query .= " a.id as application_id ,";
+        $query .= " a.id as application_id ,a.participants ,";
         $query .= " f.festival_name , f.id as festival_id ,";
         $query .= " h.id as hotel_id , h.hotel_name  ";
         $query .= " FROM groups as g ";
@@ -67,21 +69,26 @@ class Group extends Model {
         $query .= " LEFT JOIN applications as a ON g.id = a.group_id ";
         $query .= " LEFT JOIN events as e ON a.event_id = e.id ";
         $query .= " LEFT JOIN festivals as f ON e.festival_id = f.id ";
+        $query .= " JOIN countries as ccc ON f.country_id = ccc.id";
         $query .= " LEFT JOIN hotels as h ON h.id = a.hotel_id  ";
         $query .= " WHERE LOWER(g." . $field . ") LIKE LOWER('%" . Model::db()->prep($value) . "%') ";
         $query .= " ORDER BY g.id DESC";
-        $query .= " LIMIT 20 ";
 
         $result = Model::db()->query($query);
         $groups = array();
 
         $group_id = -1;
+        
+        $limit = 20;
+        $br = 0;
 
         while ($row = Model::db()->fetch_assoc($result)) {
 
             if ($group_id != $row['id']) {
+                if($br++ >= $limit) {break;}
                 $groups[$row['id']] = $row;
                 $row['festivals'] = array();
+                
             }
             if ($row['event_id']) {
                 
@@ -91,12 +98,14 @@ class Group extends Model {
                 $group['festivals'][] = [
                     'application_id' => $row['application_id'],
                     'event_id' => $row['event_id'],
-                    'event_started_at' => $row['event_started_at'],
+                    'event_started_at' => TimeHelper::to_date($row['event_started_at'],'d M Y'),
                     'event_ended_at' => $row['event_ended_at'],
                     'festival_name' => $row['festival_name'],
                     'festival_id' => $row['festival_id'],
                     'hotel_id' => $row['hotel_id'],
-                    'hotel_name' => $row['hotel_name']
+                    'hotel_name' => $row['hotel_name'],
+                    'participants' => $row['participants'],
+                    'country' => $row['country']
                 ];
                 
                 $groups[$group_id] = $group;

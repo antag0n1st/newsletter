@@ -37,7 +37,8 @@ class Application extends Model {
         'created_at',
         'is_canceled',
         'board_basis_booked',
-        'category_id'
+        'category_id',
+        'application_date_sent'
     );
     
     public $id;
@@ -67,6 +68,7 @@ class Application extends Model {
     public $is_canceled;
     public $invoice_paid_sum;
     public $category_id;
+    public $application_date_sent;
     
     public $group_name;
     public $festival_name;
@@ -79,8 +81,8 @@ class Application extends Model {
     
     public static function get_application_by_id($id){
         
-        $query = " SELECT a.id as application_id , a.* , g.* , c.*,cg.*,h.*,e.*,f.*,u.* ";
-        $query .= "  ";
+        $query = " SELECT a.id as application_id , a.* , c.*,cg.*,h.*,e.*,f.*,u.*, ";
+        $query .= " g.group_name , g.contact_name ";
         $query .= " FROM applications as a ";
         $query .= " JOIN groups as g ON a.group_id = g.id ";
         $query .= " LEFT JOIN countries as c ON g.country_id = c.id ";

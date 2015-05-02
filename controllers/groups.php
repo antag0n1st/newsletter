@@ -145,6 +145,7 @@ class GroupsController extends Controller {
     }
     
     private function update_group_with_post(&$group){
+        /* @var $group Group */
             $group->group_name = $this->get_post('group_name');
             $group->contact_name = $this->get_post('contact_name');
             $group->email = $this->get_post('email');
@@ -157,6 +158,7 @@ class GroupsController extends Controller {
             $group->comment = $this->get_post('comment');
             $group->other_emails = $this->get_post('other_emails');
             $group->manager = $this->get_post('manager');
+            $group->other_phone_numbers = $this->get_post('other_phones');
             return $group;
     }
 
