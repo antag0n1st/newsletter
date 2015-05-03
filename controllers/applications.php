@@ -19,12 +19,12 @@ class ApplicationsController extends Controller {
         $view = "list";
 
         Load::model('application');
-        
+
         $paginator = new Paginator(100, $page_id, 20, 'applications/main/');
 
-        $applications = Application::list_of_applications('',$paginator);
+        $applications = Application::list_of_applications('', $paginator);
         Load::assign('applications', $applications);
-        
+
         Load::assign('paginator', $paginator);
     }
 
@@ -87,7 +87,7 @@ class ApplicationsController extends Controller {
 
         Load::model('application');
         Load::model('invoice');
-        
+
         Load::model('category');
         $categories = Category::find_all();
         $c = array();
@@ -127,10 +127,10 @@ class ApplicationsController extends Controller {
             $application->number_of_rooms = $this->get_post('number_of_rooms');
             $application->board_basis_booked = $this->get_post('board_basis');
 
-            if(!$application->application_is_sent and $this->value_for_checkbox('application_is_sent')){
+            if (!$application->application_is_sent and $this->value_for_checkbox('application_is_sent')) {
                 $application->application_date_sent = TimeHelper::DateTimeAdjusted();
             }
-            
+
             $application->application_is_sent = $this->value_for_checkbox('application_is_sent');
             $application->application_has_answer = $this->value_for_checkbox('applications_has_answer');
             $application->invitation_is_sent = $this->value_for_checkbox('invitation_is_sent');
@@ -142,26 +142,27 @@ class ApplicationsController extends Controller {
             $invoices = $this->get_post('invoices');
             $invoices = json_decode($invoices);
 
-            Invoice::remove_by_application_id($id,$invoices);
+            Invoice::remove_by_application_id($id, $invoices);
             $application->invoice_paid_sum = 0;
 
             foreach ($invoices as $key => $invoice) {
                 /* @var $invoice Invoice */
                 /* @var $i Invoice */
-              
+
                 $i = Invoice::find_by_key_and_application($invoice->invoice_key, $id);
-                
-                if(!$i){
+
+                if (!$i) {
                     $i = new Invoice();
                     $i->created_at = TimeHelper::DateTimeAdjusted();
                     $i->application_id = $id;
                     $i->invoice_key = $invoice->invoice_key;
+                    $i->invoice_number = $this->generate_invoice_number($i);
                 }
-              
-                if(!$i->is_paid and $invoice->is_paid){
+
+                if (!$i->is_paid and $invoice->is_paid) {
                     $i->paid_at = TimeHelper::DateTimeAdjusted();
                 }
-                
+
                 $i->is_paid = $invoice->is_paid;
                 $i->price = $invoice->price;
                 $i->subject_id = $invoice->subject_id;
@@ -181,7 +182,7 @@ class ApplicationsController extends Controller {
 
         $application = Application::get_application_by_id($id);
         $inv = Invoice::find_by_application_id($id);
-      
+
         if ($inv) {
             $application->invoices = count($inv) ? json_encode($inv) : '';
         } else {
@@ -193,7 +194,7 @@ class ApplicationsController extends Controller {
         Load::assign('id', $id);
     }
 
-    public function list_by_filter($filter,$page_id = 1) {
+    public function list_by_filter($filter, $page_id = 1) {
 
         global $view;
         global $_active_page_;
@@ -204,10 +205,10 @@ class ApplicationsController extends Controller {
         $view = "list";
 
         Load::model('application');
-        
-        $paginator = new Paginator(100, $page_id, 20, 'applications/list-by-filter/'.$filter.'/');
-        $applications = Application::list_of_applications($filter,$paginator);
-        
+
+        $paginator = new Paginator(100, $page_id, 20, 'applications/list-by-filter/' . $filter . '/');
+        $applications = Application::list_of_applications($filter, $paginator);
+
         Load::assign('applications', $applications);
         Load::assign('paginator', $paginator);
         Load::assign('filter', str_replace("-", " ", $filter));
@@ -227,7 +228,7 @@ class ApplicationsController extends Controller {
 
         Load::model('invoice');
         Load::model('application');
-        
+
         Load::model('category');
         $categories = Category::find_all();
         $c = array();
@@ -286,16 +287,16 @@ class ApplicationsController extends Controller {
 
             $app->remarks = $this->get_post('remarks');
             $app->application_is_sent = $this->value_for_checkbox('application_is_sent');
-            
-            if($app->application_is_sent){
+
+            if ($app->application_is_sent) {
                 $app->application_date_sent = TimeHelper::DateTimeAdjusted();
             }
-            
+
             $app->application_has_answer = $this->value_for_checkbox('applications_has_answer');
             $app->invitation_is_sent = $this->value_for_checkbox('invitation_is_sent');
             $app->invitation_price = $this->get_post('invitation_price');
             $app->invoice_price = $this->get_post('invoice_price');
-            
+
 
             $app->group_manager = $this->get_post('group_manager');
             $app->user_id = Membership::instance()->user->user_id;
@@ -314,6 +315,7 @@ class ApplicationsController extends Controller {
                 $i->is_paid = $invoice->is_paid ? 1 : 0;
                 $i->subject_id = (int) $invoice->subject_id;
                 $i->price = (int) $invoice->price;
+                $i->invoice_number = $this->generate_invoice_number($i);
                 $i->save();
                 $app->invoice_paid_sum += $i->is_paid ? $i->price : 0;
             }
@@ -324,8 +326,29 @@ class ApplicationsController extends Controller {
         }
     }
 
+    private function generate_invoice_number($invoice) {
+        
+        $letters = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J',
+            'K', 'L', 'M', 'N','O','P','Q','R','S','T',
+            'U','V','W','X','Y','Z');
+        
+        $month_number = (int) TimeHelper::to_date($invoice->created_at, 'm');
+        $day_number = (int) TimeHelper::to_date($invoice->created_at, 'd');
+        
+        return substr($invoice->id, -2) ."-".substr($invoice->application_id, -2). "-".$day_number. $letters[$month_number] . "/" . TimeHelper::to_date($invoice->created_at, "Y");
+    }
+
     private function value_for_checkbox($name) {
         return $this->get_post($name) == "yes" ? 1 : 0;
     }
 
+    
+    public function gen_invoice(){
+        Load::model('invoice');
+        $invoices = Invoice::find_all();
+        foreach ($invoices as $key => $invoice) {
+            $invoice->invoice_number = $this->generate_invoice_number($invoice);
+            $invoice->save();
+        }
+    }
 }

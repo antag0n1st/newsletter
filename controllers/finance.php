@@ -75,5 +75,64 @@ class FinanceController extends Controller {
             echo json_encode([]);
         }
     }
+    
+    public function invoices(){
+        
+        global $_active_page_;
+        global $_active_page_submenu_;
+
+        $_active_page_ = 'finance';
+        $_active_page_submenu_ = 'invoices';
+        
+        Load::model('invoice');
+        
+        $invoices = Invoice::find_by_upcoming_by_subject();
+        
+        Load::assign('invoices', $invoices);
+        
+    }
+    
+    public function by_subject($id){
+        
+        global $_active_page_;
+        global $_active_page_submenu_;
+
+        $_active_page_ = 'finance';
+        $_active_page_submenu_ = 'invoices';
+        
+        Load::model('invoice');
+        
+        $invoices = Invoice::find_by_subject($id);
+        
+        Load::assign('invoices', $invoices);
+    }
+    
+    public function all_invoices($page_id = 1){
+        global $_active_page_;
+        global $_active_page_submenu_;
+
+        $_active_page_ = 'finance';
+        $_active_page_submenu_ = 'all-invoices';
+        
+        Load::model('invoice');
+        
+        $paginator = new Paginator(0, $page_id, 20, 'finance/all-invoices/');
+        
+        $invoices = Invoice::find_all_invoices($paginator);
+        
+        Load::assign('invoices', $invoices);
+        Load::assign('paginator', $paginator);
+    }
+    
+    public function invoice_details($id = 0){
+        global $layout;
+        $layout = null;
+        
+        Load::model('invoice');
+        $invoice = Invoice::find_invoice_by_id($id);
+        Load::assign('invoice', $invoice);
+        
+        Load::view('finance/invoice');
+    }
 
 }

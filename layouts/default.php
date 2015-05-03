@@ -22,7 +22,7 @@
 
                 <?php } else { ?>
 
-                    <p class="login-title"> Sign in </p>        
+                    <span class="login-title" > Sign in </span> or <a href="<?php echo URL::abs('register'); ?>">register</a>       
 
                 <?php } ?>
 

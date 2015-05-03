@@ -46,9 +46,9 @@ class HTML {
         }
     }
 
-    public static function textfield($name = "", $class = "", $style = "", $attr = array(), $return = false, $value = "") {
+    public static function textfield($name = "", $class = "", $style = "", $attr = array(), $return = false, $value = "",$type="text") {
 
-        $textfield = "<input type=\"text\"";
+        $textfield = "<input type=\"".$type."\"";
         $textfield .= " name=\"" . $name . "\" id=\"" . $name . "\"";
         $textfield .= " class=\"" . $class . "\" style=\"" . $style . "\"";
         if ($value) {

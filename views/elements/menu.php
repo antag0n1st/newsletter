@@ -2,8 +2,9 @@
     <div id="top-menu">
         <div id="menu-wraper">
             <?php global $_active_page_;
-            global $_active_page_submenu_; ?>
-            
+            global $_active_page_submenu_;
+            ?>
+
             <div> 
                 <a href="<?php echo URL::abs('applications/active'); ?>" 
                    class="menu-list <?php echo $_active_page_ == 'applications' ? 'active' : ''; ?>"> 
@@ -191,58 +192,58 @@
 
 <?php if ($_active_page_ == 'applications'): ?>
     <div class="submenu"> 
-        
+
         <div> 
             <a href="<?php echo URL::abs('applications/active'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'active' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 Active 
             </a> 
         </div>
-        
+
         <div> 
             <a href="<?php echo URL::abs('applications/by-festival'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'by-festival' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 By Festival 
             </a> 
         </div>
-        
+
         <div> 
             <a href="<?php echo URL::abs('applications'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'list' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 All 
             </a> 
         </div>
-        
+
         <div> 
             <a href="<?php echo URL::abs('applications/list-by-filter/application-is-not-sent'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'application-is-not-sent' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 App Not Sent
             </a> 
         </div>
-        
+
         <div> 
             <a href="<?php echo URL::abs('applications/list-by-filter/application-is-sent'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'application-is-sent' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 App Sent
             </a> 
         </div>
-        
+
         <div> 
             <a href="<?php echo URL::abs('applications/list-by-filter/application-is-answered'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'application-is-answered' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 App Answered
             </a> 
         </div>
-        
+
         <div> 
             <a href="<?php echo URL::abs('applications/add'); ?>" 
                class="<?php echo $_active_page_submenu_ == 'add' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
                 Add 
             </a> 
         </div>
-        
-        
-        
+
+
+
     </div>
 <?php endif; ?>
 
@@ -254,5 +255,20 @@
                 Subjects 
             </a> 
         </div>
+        
+        <div> 
+            <a href="<?php echo URL::abs('finance/invoices'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'invoices' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+               Upcoming Invoices 
+            </a> 
+        </div>
+        
+        <div> 
+            <a href="<?php echo URL::abs('finance/all-invoices'); ?>" 
+               class="<?php echo $_active_page_submenu_ == 'all-invoices' ? 'submenu-active' : 'submenu-list submenu_hover'; ?>">
+               All Invoices 
+            </a> 
+        </div>
+        
     </div>
 <?php endif; ?>
